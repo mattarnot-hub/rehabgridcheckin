@@ -11,20 +11,59 @@
     { name: "Retrain", focus: "Maintenance: keep your gains, prevent setbacks", weeks: Infinity, visitsPerWeek: null, length: "as needed" }
   ];
 
+
+  // Home Exercise Program (from the clinic's Home_Exercise_Program handout)
+  var HEP = [
+    { id: "calf", n: 1, name: "Calf Pin-and-Stretch", area: "Foot / Calf", when: "Any time of day",
+      img: "assets/hep-1-calf-pin-and-stretch.png", alt: "Seated with a ball under the calf, pumping the ankle up and down",
+      steps: [
+        "Sit on a hard floor with a lacrosse ball (or similar firm ball) under your calf.",
+        "Rest the weight of your leg on the ball to pin the calf muscle.",
+        "While pinned, slowly pull your foot up toward your shin (dorsiflexion), then point it away (plantarflexion).",
+        "Move the ball to a new spot along the calf and repeat. Avoid placing the ball directly behind the knee."
+      ],
+      purpose: "Release calf tension and improve ankle mobility.", dose: "Time: 2 minutes" },
+    { id: "plantar", n: 2, name: "Plantar Fascia Rolling", area: "", when: "End of day",
+      img: "assets/hep-2-plantar-fascia-rolling.png", alt: "Seated in a chair rolling a ball under the arch of the foot from heel to ball",
+      steps: [
+        "Sit in a chair with a ball under the sole of your foot.",
+        "Roll gently from the heel to the ball of the foot, covering the entire sole.",
+        "Keep the pressure light to moderate."
+      ],
+      purpose: "Reduce tension along the underside of the foot.", dose: "Time: 2 minutes" },
+    { id: "hamstring", n: 3, name: "Hamstring Loading with Band", area: "Hip / Hamstring", when: "Lying on your back",
+      img: "assets/hep-3-hamstring-loading-band.png", alt: "Lying on the back, driving the heel down against a band while turning the ankle in and out",
+      steps: [
+        "Lie on your back with the resistance band positioned as shown in clinic.",
+        "Drive your heel down into the floor against the band.",
+        "While holding the drive, slowly turn the ankle in (inversion) and out (eversion) under control.",
+        "Release slowly. Take your time on the way back; the slow release is the most important part."
+      ],
+      purpose: "Improve hamstring activation and ankle range of motion together.", dose: "Sets: 4 &middot; Reps: 8" },
+    { id: "toes", n: 4, name: "Toe Mobility", area: "", when: "End of day",
+      img: "assets/hep-4-toe-mobility.png", alt: "Spreading the toes apart, then curling them down and straightening",
+      steps: [
+        "Sit with your foot resting on the opposite knee.",
+        "Using your hand, gently spread the toes apart (splay).",
+        "Then gently bend the toes downward (flexion) and hold briefly."
+      ],
+      purpose: "Reduce tightness in the muscles on top of the foot and toes.", dose: "Time: 2 minutes" }
+  ];
+
   // ---------- storage ----------
   function loadState() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return { logs: {}, startDate: null };
+      if (!raw) return { logs: {}, startDate: null, freq: {} };
       var parsed = JSON.parse(raw);
-      return { logs: parsed.logs || {}, startDate: parsed.startDate || null };
+      return { logs: parsed.logs || {}, startDate: parsed.startDate || null, freq: parsed.freq || {} };
     } catch (e) {
-      return { logs: {}, startDate: null };
+      return { logs: {}, startDate: null, freq: {} };
     }
   }
   function saveState() {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ logs: state.logs, startDate: state.startDate }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ logs: state.logs, startDate: state.startDate, freq: state.freq }));
     } catch (e) { /* private mode / full storage: app still works this session */ }
   }
 
@@ -109,6 +148,25 @@
     return out;
   }
 
+  function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+
+  function renderHep() {
+    var out = "";
+    HEP.forEach(function (x) {
+      out += '<article class="hep card">' +
+        '<div class="hep-top"><span class="hep-num">' + x.n + '</span>' +
+          '<div class="hep-title"><h3>' + x.name + '</h3>' +
+          '<div class="hep-tags">' + (x.area ? '<span class="tag">' + x.area + '</span>' : '') + '<span class="tag when">' + x.when + '</span></div></div></div>' +
+        '<img class="hep-img" src="' + x.img + '" alt="' + esc(x.alt) + '" width="1400" height="800" loading="lazy">' +
+        '<ol class="hep-steps">' + x.steps.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ol>' +
+        '<p class="hep-purpose"><b>Purpose:</b> ' + x.purpose + '</p>' +
+        '<div class="hep-dose"><span>' + x.dose + '</span>' +
+          '<label>Frequency: <input type="text" class="freq" data-id="' + x.id + '" maxlength="40" placeholder="e.g. 2x daily" value="' + esc(state.freq[x.id] || "") + '"></label></div>' +
+      '</article>';
+    });
+    return out;
+  }
+
   function planStartLabel() {
     if (state.startDate) {
       return "Started " + new Date(state.startDate + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
@@ -151,6 +209,12 @@
           '</button>' +
         '</div>' +
         '<div class="note">From your Treatment Plan &mdash; At-Home Priorities. No other lifestyle changes were noted.</div>' +
+      '</section>' +
+
+      '<section>' +
+        '<div class="section-head"><h2>Home Exercise Program</h2><span class="hint">Karim Hanna, BKin, PT</span></div>' +
+        '<p class="hep-intro">Complete these exercises as prescribed. Mild pressure or stretch is expected; stop and contact us if you feel sharp pain, numbness or tingling.</p>' +
+        '<div class="hep-list">' + renderHep() + '</div>' +
       '</section>' +
 
       '<section>' +
@@ -199,6 +263,7 @@
 
       '<footer>' +
         '<div class="clinic-name">The Rehab Grid &mdash; Physiotherapy &amp; Sports Performance</div>' +
+        '<div>Know Better. Move Better. Feel Better. &middot; therehabgrid.com &middot; karim@therehabgrid.com</div>' +
         "<div>24 hrs&rsquo; notice to cancel or reschedule, or the visit is billed in full.</div>" +
         '<div class="locations">' +
           '<div><b>North York</b><br>101&ndash;1865 Leslie St, M3B 2M5<br>647-955-6223</div>' +
@@ -228,6 +293,12 @@
         toggle(btn.getAttribute("data-key"));
       });
     }
+    document.querySelectorAll(".freq").forEach(function (inp) {
+      inp.addEventListener("change", function () {
+        state.freq[inp.getAttribute("data-id")] = inp.value.trim();
+        saveState();
+      });
+    });
     var setBtn = document.getElementById("set-start-btn");
     var input = document.getElementById("start-date-input");
     if (setBtn && input) {

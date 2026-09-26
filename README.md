@@ -10,6 +10,7 @@ A private, no-backend daily check-in app for Matt's home-exercise plan from The 
 
 ## What it tracks
 - Two home exercises from the treatment plan: **calf ball release** and **foot rolling**, with a daily streak and 7-day history.
+- The full **Home Exercise Program** handout from the clinic (4 exercises with steps, purpose, dose and the original diagrams), each with a local-only "Frequency" note you can fill in.
 - Reference content from the plan: goals, contributing factors, the 4-phase roadmap (with an optional start date to highlight your current phase), next-session note, and clinic contact info.
 
 ## Run locally
