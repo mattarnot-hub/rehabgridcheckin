@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "rehabgrid.v1";
+  var STORAGE_KEY = "rehabgrid.v1";       // offline cache of the shared record
   var THEME_KEY = "rehabgrid.theme";
 
   var PHASES = [
@@ -10,7 +10,6 @@
     { name: "Reload", focus: "Tissue loading: progress strength, power, control", weeks: 2, visitsPerWeek: 1, length: "45 min" },
     { name: "Retrain", focus: "Maintenance: keep your gains, prevent setbacks", weeks: Infinity, visitsPerWeek: null, length: "as needed" }
   ];
-
 
   // Home Exercise Program (from the clinic's Home_Exercise_Program handout)
   var HEP = [
@@ -50,8 +49,8 @@
       purpose: "Reduce tightness in the muscles on top of the foot and toes.", dose: "Time: 2 minutes" }
   ];
 
-  // ---------- storage ----------
-  function loadState() {
+  // ---------- offline cache (localStorage mirrors the last known shared record) ----------
+  function loadCache() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return { logs: {}, startDate: null, freq: {} };
@@ -61,7 +60,7 @@
       return { logs: {}, startDate: null, freq: {} };
     }
   }
-  function saveState() {
+  function saveCache() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ logs: state.logs, startDate: state.startDate, freq: state.freq }));
     } catch (e) { /* private mode / full storage: app still works this session */ }
@@ -73,8 +72,20 @@
   function addDays(str, n) { var d = new Date(str + "T00:00:00"); d.setDate(d.getDate() + n); return d; }
   function isComplete(rec) { return !!(rec && rec.calfBall && rec.footRoll); }
 
-  var state = loadState();
+  var state = loadCache();
   state.todayKey = fmtDate(new Date());
+
+  // ---------- cloud sync state ----------
+  var cloud = {
+    configured: !!(window.FIREBASE_CONFIG),
+    connected: false,     // a live snapshot has arrived at least once
+    isOwner: false,       // signed in as the one owner account
+    authReady: false,
+    docRef: null,
+    auth: null,
+    signingIn: false,
+    authError: ""
+  };
 
   // ---------- derived ----------
   function computeStreak() {
@@ -104,6 +115,9 @@
     return PHASES.length - 1;
   }
 
+  // can the viewer in front of the page actually edit anything right now?
+  function canEdit() { return !cloud.configured || cloud.isOwner; }
+
   // ---------- markup ----------
   function checkSvg() {
     return '<svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--accent-ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -113,6 +127,9 @@
   }
   function clockSvg() {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>';
+  }
+  function lockSvg() {
+    return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>';
   }
 
   function renderHistory() {
@@ -161,7 +178,7 @@
         '<ol class="hep-steps">' + x.steps.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ol>' +
         '<p class="hep-purpose"><b>Purpose:</b> ' + x.purpose + '</p>' +
         '<div class="hep-dose"><span>' + x.dose + '</span>' +
-          '<label>Frequency: <input type="text" class="freq" data-id="' + x.id + '" maxlength="40" placeholder="e.g. 2x daily" value="' + esc(state.freq[x.id] || "") + '"></label></div>' +
+          '<label>Frequency: <input type="text" class="freq" data-id="' + x.id + '" maxlength="40" placeholder="e.g. 2x daily" value="' + esc(state.freq[x.id] || "") + '"' + (canEdit() ? "" : " disabled") + '></label></div>' +
       '</article>';
     });
     return out;
@@ -174,10 +191,39 @@
     return "Set your start date to track your phase";
   }
 
+  function renderSyncBadge() {
+    if (!cloud.configured) return "";
+    if (cloud.isOwner) return '<span class="sync-badge owner">' + lockSvg() + ' live &mdash; you can edit</span>';
+    if (cloud.connected) return '<span class="sync-badge">' + flameSvg() + ' live from Matt’s device</span>';
+    return '<span class="sync-badge pending">connecting&hellip;</span>';
+  }
+
+  function renderOwnerBox() {
+    if (!cloud.configured) {
+      return '<div class="privacy">This is a local preview build &mdash; cloud sync isn’t configured yet, so check-ins stay on this device only.</div>';
+    }
+    if (cloud.isOwner) {
+      return '<div class="ownerbox">' +
+        '<span class="owner-pill">' + lockSvg() + ' Signed in as owner &mdash; your changes publish live to everyone</span>' +
+        '<button class="link" id="signout-btn" type="button">sign out</button>' +
+      '</div>';
+    }
+    return '<div class="ownerbox">' +
+      '<button class="link" id="signin-toggle" type="button">Owner sign-in</button>' +
+      '<form id="signin-form" hidden>' +
+        '<input type="email" id="signin-email" placeholder="email" autocomplete="username" required>' +
+        '<input type="password" id="signin-password" placeholder="password" autocomplete="current-password" required>' +
+        '<button type="submit">' + (cloud.signingIn ? "signing in…" : "sign in") + '</button>' +
+      '</form>' +
+      (cloud.authError ? '<div class="auth-error">' + esc(cloud.authError) + '</div>' : '') +
+    '</div>';
+  }
+
   function render() {
     var today = state.logs[state.todayKey] || {};
     var bothDone = isComplete(today);
     var streak = computeStreak();
+    var editable = canEdit();
 
     document.getElementById("app").innerHTML =
       '<div>' +
@@ -186,6 +232,7 @@
         '</span></div>' +
         '<h1>Matt&rsquo;s Recovery Plan</h1>' +
         '<p class="lede">Main concern: <b>Plantar fasciitis</b>, with hamstring &amp; calf strength work. Daily home care keeps the gains from each in-clinic session.</p>' +
+        renderSyncBadge() +
       '</div>' +
 
       '<div class="card streak-card">' +
@@ -197,13 +244,13 @@
       '</div>' +
 
       '<section>' +
-        '<div class="section-head"><h2>Today&rsquo;s Home Care</h2><span class="hint">' + (bothDone ? "done for today ✓" : "tap to check off") + '</span></div>' +
+        '<div class="section-head"><h2>Today&rsquo;s Home Care</h2><span class="hint">' + (editable ? (bothDone ? "done for today ✓" : "tap to check off") : "Matt’s progress — read-only") + '</span></div>' +
         '<div class="exercise-list">' +
-          '<button class="exercise" data-key="calfBall" data-done="' + !!today.calfBall + '" type="button">' +
+          '<button class="exercise" data-key="calfBall" data-done="' + !!today.calfBall + '" type="button"' + (editable ? "" : " disabled") + '>' +
             '<span class="box">' + checkSvg() + '</span>' +
             '<span class="txt"><div class="name">Calf ball release</div><div class="why">Eases calf tightness feeding the plantar fascia</div></span>' +
           '</button>' +
-          '<button class="exercise" data-key="footRoll" data-done="' + !!today.footRoll + '" type="button">' +
+          '<button class="exercise" data-key="footRoll" data-done="' + !!today.footRoll + '" type="button"' + (editable ? "" : " disabled") + '>' +
             '<span class="box">' + checkSvg() + '</span>' +
             '<span class="txt"><div class="name">Foot rolling</div><div class="why">Mobilizes the plantar fascia under the arch</div></span>' +
           '</button>' +
@@ -239,8 +286,7 @@
         '<div class="section-head"><h2>Your Road Map</h2></div>' +
         '<div class="plan-start">' +
           '<span id="plan-start-text">' + planStartLabel() + '</span>' +
-          '<button class="link" id="set-start-btn" type="button">set</button>' +
-          '<input type="date" id="start-date-input" hidden />' +
+          (editable ? '<button class="link" id="set-start-btn" type="button">set</button><input type="date" id="start-date-input" hidden />' : '') +
         '</div>' +
         '<div class="roadmap">' + renderRoadmap() + '</div>' +
       '</section>' +
@@ -269,19 +315,42 @@
           '<div><b>North York</b><br>101&ndash;1865 Leslie St, M3B 2M5<br>647-955-6223</div>' +
           '<div><b>Stouffville</b><br>100&ndash;37 Sandiford Dr, L4A 3Z2<br>289-401-5033</div>' +
         '</div>' +
-        '<div class="privacy">Your check-ins stay on this device only &mdash; this site has no backend and makes no network requests.</div>' +
+        (cloud.configured
+          ? '<div class="privacy">Anyone with this link sees Matt’s real check-in history, live. Only the signed-in owner can change it.</div>'
+          : '') +
+        renderOwnerBox() +
       '</footer>';
 
     wireEvents();
   }
 
-  function toggle(key) {
-    var today = Object.assign({}, state.logs[state.todayKey] || {});
-    today[key] = !today[key];
-    today.date = state.todayKey;
-    state.logs[state.todayKey] = today;
-    saveState();
+  // ---------- writes ----------
+  // Applies a mutation locally (optimistic), then persists it either to the
+  // cloud doc (if signed in as owner) or to the offline cache (local-only mode).
+  function commit(mutator) {
+    if (!canEdit()) return; // read-only visitors can't get here via the UI, but guard anyway
+    mutator();
+    saveCache();
     render();
+    if (cloud.configured && cloud.docRef && cloud.isOwner) {
+      cloud.docRef.set({
+        logs: state.logs,
+        startDate: state.startDate,
+        freq: state.freq,
+        updatedAt: new Date().toISOString()
+      }, { merge: false }).catch(function (err) {
+        console.error("sync failed, kept locally:", err);
+      });
+    }
+  }
+
+  function toggle(key) {
+    commit(function () {
+      var today = Object.assign({}, state.logs[state.todayKey] || {});
+      today[key] = !today[key];
+      today.date = state.todayKey;
+      state.logs[state.todayKey] = today;
+    });
   }
 
   function wireEvents() {
@@ -289,14 +358,14 @@
     if (list) {
       list.addEventListener("click", function (e) {
         var btn = e.target.closest(".exercise");
-        if (!btn) return;
+        if (!btn || btn.disabled) return;
         toggle(btn.getAttribute("data-key"));
       });
     }
     document.querySelectorAll(".freq").forEach(function (inp) {
       inp.addEventListener("change", function () {
-        state.freq[inp.getAttribute("data-id")] = inp.value.trim();
-        saveState();
+        if (inp.disabled) return;
+        commit(function () { state.freq[inp.getAttribute("data-id")] = inp.value.trim(); });
       });
     });
     var setBtn = document.getElementById("set-start-btn");
@@ -311,9 +380,39 @@
       input.addEventListener("change", function (e) {
         var val = e.target.value;
         if (!val) return;
-        state.startDate = val;
-        saveState();
+        commit(function () { state.startDate = val; });
+      });
+    }
+
+    // owner sign-in / sign-out
+    var toggleBtn = document.getElementById("signin-toggle");
+    var form = document.getElementById("signin-form");
+    if (toggleBtn && form) {
+      toggleBtn.addEventListener("click", function () {
+        form.hidden = !form.hidden;
+        if (!form.hidden) document.getElementById("signin-email").focus();
+      });
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!cloud.auth) return;
+        var email = document.getElementById("signin-email").value.trim();
+        var pass = document.getElementById("signin-password").value;
+        cloud.signingIn = true;
+        cloud.authError = "";
         render();
+        cloud.auth.signInWithEmailAndPassword(email, pass).catch(function (err) {
+          cloud.authError = "Sign-in failed — check email and password.";
+          console.error(err);
+        }).then(function () {
+          cloud.signingIn = false;
+          render();
+        });
+      });
+    }
+    var signoutBtn = document.getElementById("signout-btn");
+    if (signoutBtn) {
+      signoutBtn.addEventListener("click", function () {
+        if (cloud.auth) cloud.auth.signOut();
       });
     }
   }
@@ -338,6 +437,44 @@
     }
   }
 
+  // ---------- cloud boot ----------
+  function initCloud() {
+    if (!cloud.configured || typeof firebase === "undefined") { render(); return; }
+    try {
+      firebase.initializeApp(window.FIREBASE_CONFIG);
+      cloud.auth = firebase.auth();
+      var firestore = firebase.firestore();
+      cloud.docRef = firestore.collection("public").doc("rehabgrid");
+
+      cloud.docRef.onSnapshot(function (snap) {
+        cloud.connected = true;
+        if (snap.exists) {
+          var data = snap.data();
+          // Never let a stale/empty cloud read blank out what the owner is mid-typing.
+          state.logs = data.logs || {};
+          state.startDate = data.startDate || null;
+          state.freq = data.freq || {};
+          saveCache();
+        }
+        render();
+      }, function (err) {
+        console.error("Firestore subscription error:", err);
+        render(); // fall back to whatever is in the offline cache
+      });
+
+      cloud.auth.onAuthStateChanged(function (user) {
+        cloud.isOwner = !!user;
+        cloud.authReady = true;
+        render();
+      });
+    } catch (e) {
+      console.error("Firebase init failed, running local-only:", e);
+      cloud.configured = false;
+      render();
+    }
+  }
+
   initTheme();
-  render();
+  render();       // first paint from cache, instantly
+  initCloud();    // then upgrade to the live shared record
 })();

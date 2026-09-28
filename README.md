@@ -1,24 +1,25 @@
 # Rehab Grid Check-In
 
-A private, no-backend daily check-in app for Matt's home-exercise plan from The Rehab Grid (plantar fasciitis / hamstring & calf strength).
+A daily check-in app for Matt's home-exercise plan from The Rehab Grid (plantar fasciitis / hamstring & calf strength). Anyone with the link sees Matt's real, live progress; only Matt can update it.
 
-## Privacy model
-- The repo and GitHub Pages site contain **only app code and the plan's reference content** (goals, roadmap, clinic info) — no personal check-in history is ever committed.
-- Daily check-ins (which exercises were done, and your streak) live only in that browser's `localStorage` — never sent anywhere.
-- Strict Content-Security-Policy: no network requests (`connect-src 'none'`), no third-party scripts, no analytics, no fonts loaded over the network.
-- Checking in on a different device or browser starts a separate, empty history there — this is a single-device journal, not a synced account.
+## Data model
+- Check-ins live in a single shared Firestore document (`public/rehabgrid`), read openly by anyone who opens the page, and updated only by whoever is signed in as the owner.
+- The repo and its GitHub Pages build contain **only app code and the plan's reference content** (goals, roadmap, clinic info, the Home Exercise Program handout) — no personal check-in history is ever committed; that data lives only in Firestore.
+- **Owner sign-in**: a link in the footer opens an email/password form (Firebase Authentication). The app never offers public sign-up, so the only account that can ever sign in is the one created manually in the Firebase console (see `js/firebase-config.js`) — that's what keeps writes to Matt even though reads are public.
+- Each visitor's browser also keeps an offline cache of the last-seen record in `localStorage`, purely so the page isn't blank while the live connection loads or if it's briefly offline; it's not a separate private copy.
+- Until `js/firebase-config.js` has a real project's config, the site quietly runs in a **local-only preview mode** — everything works, but nothing is shared and nothing leaves the device. See that file for the one-time Firebase setup steps.
 
 ## What it tracks
 - Two home exercises from the treatment plan: **calf ball release** and **foot rolling**, with a daily streak and 7-day history.
-- The full **Home Exercise Program** handout from the clinic (4 exercises with steps, purpose, dose and the original diagrams), each with a local-only "Frequency" note you can fill in.
-- Reference content from the plan: goals, contributing factors, the 4-phase roadmap (with an optional start date to highlight your current phase), next-session note, and clinic contact info.
+- The full **Home Exercise Program** handout from the clinic (4 exercises with steps, purpose, dose and the original diagrams), each with an owner-editable "Frequency" note.
+- Reference content from the plan: goals, contributing factors, the 4-phase roadmap (with an optional start date to highlight the current phase), next-session note, and clinic contact info.
 
 ## Run locally
     python -m http.server 8080
-then open http://localhost:8080.
+then open http://localhost:8080. (Runs in local-only preview mode unless `js/firebase-config.js` is filled in.)
 
 ## Deploy
 Push to `main`. GitHub Actions (`.github/workflows/pages.yml`) builds and publishes to GitHub Pages automatically — see **Settings → Pages** (Source: GitHub Actions).
 
 ## Customize
-Edit the content blocks directly in `js/app.js` (`PHASES`, goals, chips) if the plan changes at a future visit.
+Edit the content blocks directly in `js/app.js` (`PHASES`, `HEP`, goals, chips) if the plan changes at a future visit.
