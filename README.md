@@ -5,7 +5,7 @@ A daily check-in app for Matt's home-exercise plan from The Rehab Grid (plantar 
 ## Data model
 - Check-ins live in a single shared Firestore document (`public/rehabgrid`), read openly by anyone who opens the page, and updated only by whoever is signed in as the owner.
 - The repo and its GitHub Pages build contain **only app code and the plan's reference content** (goals, roadmap, clinic info, the Home Exercise Program handout) — no personal check-in history is ever committed; that data lives only in Firestore.
-- **Owner sign-in**: a link in the footer opens an email/password form (Firebase Authentication). The app never offers public sign-up, so the only account that can ever sign in is the one created manually in the Firebase console (see `js/firebase-config.js`) — that's what keeps writes to Matt even though reads are public.
+- **Owner sign-in**: a "Sign in with Google" button in the footer (Firebase Authentication). Anyone can attempt it with their own Google account, but the Firestore security rules only grant write access to one specific email (`OWNER_EMAIL` in `js/firebase-config.js`) — that's what keeps writes to Matt even though reads and sign-in itself are open.
 - Each visitor's browser also keeps an offline cache of the last-seen record in `localStorage`, purely so the page isn't blank while the live connection loads or if it's briefly offline; it's not a separate private copy.
 - Until `js/firebase-config.js` has a real project's config, the site quietly runs in a **local-only preview mode** — everything works, but nothing is shared and nothing leaves the device. See that file for the one-time Firebase setup steps.
 

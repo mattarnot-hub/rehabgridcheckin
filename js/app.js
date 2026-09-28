@@ -79,7 +79,8 @@
   var cloud = {
     configured: !!(window.FIREBASE_CONFIG),
     connected: false,     // a live snapshot has arrived at least once
-    isOwner: false,       // signed in as the one owner account
+    isOwner: false,       // signed in AND the email matches OWNER_EMAIL
+    currentUser: null,    // whoever is signed in, even if not the owner
     authReady: false,
     docRef: null,
     auth: null,
@@ -130,6 +131,9 @@
   }
   function lockSvg() {
     return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>';
+  }
+  function googleSvg() {
+    return '<svg viewBox="0 0 18 18" width="15" height="15"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.88 2.7-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.9v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.17.28-1.7V4.97H.9A9 9 0 0 0 0 9c0 1.45.35 2.83.9 4.03l3.05-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.46 3.44 1.35l2.58-2.58A9 9 0 0 0 .9 4.97l3.05 2.33C4.66 5.17 6.65 3.58 9 3.58z"/></svg>';
   }
 
   function renderHistory() {
@@ -208,13 +212,14 @@
         '<button class="link" id="signout-btn" type="button">sign out</button>' +
       '</div>';
     }
+    if (cloud.currentUser) {
+      return '<div class="ownerbox">' +
+        '<span class="auth-error">Signed in as ' + esc(cloud.currentUser.email) + ' &mdash; that’s not the owner account, so this stays read-only.</span>' +
+        '<button class="link" id="signout-btn" type="button">sign out</button>' +
+      '</div>';
+    }
     return '<div class="ownerbox">' +
-      '<button class="link" id="signin-toggle" type="button">Owner sign-in</button>' +
-      '<form id="signin-form" hidden>' +
-        '<input type="email" id="signin-email" placeholder="email" autocomplete="username" required>' +
-        '<input type="password" id="signin-password" placeholder="password" autocomplete="current-password" required>' +
-        '<button type="submit">' + (cloud.signingIn ? "signing in…" : "sign in") + '</button>' +
-      '</form>' +
+      '<button class="google-btn" id="signin-btn" type="button">' + googleSvg() + '<span>' + (cloud.signingIn ? "signing in…" : "Owner sign-in with Google") + '</span></button>' +
       (cloud.authError ? '<div class="auth-error">' + esc(cloud.authError) + '</div>' : '') +
     '</div>';
   }
@@ -385,23 +390,22 @@
     }
 
     // owner sign-in / sign-out
-    var toggleBtn = document.getElementById("signin-toggle");
-    var form = document.getElementById("signin-form");
-    if (toggleBtn && form) {
-      toggleBtn.addEventListener("click", function () {
-        form.hidden = !form.hidden;
-        if (!form.hidden) document.getElementById("signin-email").focus();
-      });
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (!cloud.auth) return;
-        var email = document.getElementById("signin-email").value.trim();
-        var pass = document.getElementById("signin-password").value;
+    var signinBtn = document.getElementById("signin-btn");
+    if (signinBtn) {
+      signinBtn.addEventListener("click", function () {
+        if (!cloud.auth || cloud.signingIn) return;
         cloud.signingIn = true;
         cloud.authError = "";
         render();
-        cloud.auth.signInWithEmailAndPassword(email, pass).catch(function (err) {
-          cloud.authError = "Sign-in failed — check email and password.";
+        var provider = new firebase.auth.GoogleAuthProvider();
+        cloud.auth.signInWithPopup(provider).catch(function (err) {
+          if (err && err.code === "auth/popup-closed-by-user") {
+            cloud.authError = "";
+          } else if (err && err.code === "auth/unauthorized-domain") {
+            cloud.authError = "This site isn’t on the Firebase Authorized domains list yet.";
+          } else {
+            cloud.authError = "Sign-in failed — please try again.";
+          }
           console.error(err);
         }).then(function () {
           cloud.signingIn = false;
@@ -463,7 +467,9 @@
       });
 
       cloud.auth.onAuthStateChanged(function (user) {
-        cloud.isOwner = !!user;
+        cloud.currentUser = user || null;
+        var ownerEmail = (window.OWNER_EMAIL || "").toLowerCase();
+        cloud.isOwner = !!(user && user.email && ownerEmail && user.email.toLowerCase() === ownerEmail);
         cloud.authReady = true;
         render();
       });

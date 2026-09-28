@@ -145,3 +145,10 @@ button.link { background: none; border: none; color: var(--accent); font-weight:
 #signin-form input { font: inherit; font-size: 12.5px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); padding: 5px 8px; }
 #signin-form button { font: inherit; font-size: 12.5px; font-weight: 700; border: 1px solid var(--accent); border-radius: 6px; background: var(--accent); color: var(--accent-ink); padding: 5px 10px; cursor: pointer; }
 .auth-error { font-size: 11.5px; color: var(--flame); }
+
+.google-btn {
+  display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 12.5px; font-weight: 700;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink);
+  padding: 7px 12px; cursor: pointer; box-shadow: var(--shadow);
+}
+.google-btn:hover { border-color: var(--faint); }
