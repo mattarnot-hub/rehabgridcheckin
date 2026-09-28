@@ -7,11 +7,10 @@
 //      register it, then copy the firebaseConfig object it shows you into
 //      REAL_CONFIG below.
 //   3. Build → Authentication → Get started → Sign-in method → enable
-//      "Google" (needs a public-facing project name + support email — any
-//      values are fine, they're just OAuth-consent-screen labels).
-//   4. Build → Authentication → Settings → Authorized domains → Add domain →
-//      add the GitHub Pages domain (e.g. mattarnot-hub.github.io). Without
-//      this the Google sign-in popup is refused.
+//      "Email/Password".
+//   4. Build → Authentication → Users → Add user → use the SAME email as
+//      OWNER_EMAIL below, and a password only you know (this is a fresh
+//      password for this app — not your Google account password).
 //   5. Build → Firestore Database → Create database → production mode → pick
 //      a region → Enable.
 //   6. Firestore → Rules → paste and Publish (replace the email with yours):
@@ -26,9 +25,16 @@
 //          }
 //        }
 //      (Reads are public — that's the point, everyone sees your progress.
-//      Anyone can attempt to sign in with their own Google account, but the
-//      rule above means only the one email below can ever write.)
+//      The app never offers public sign-up, so the only account that can
+//      ever sign in is the one you made in step 4; the rule above is a
+//      second layer restricting writes to that exact email regardless.)
 //   7. Replace REAL_CONFIG and OWNER_EMAIL below and push.
+//
+// (We tried "Sign in with Google" first, but it hit a persistent
+// auth/internal-error — almost certainly an incomplete OAuth consent
+// screen / API setup on the Google Cloud side of this project. Plain
+// email/password sidesteps that whole cross-domain flow and is what
+// Matt's other app, Marriage Check-In, already uses successfully.)
 //
 // Until REAL_CONFIG is filled in, the site quietly runs in local-only mode
 // (each browser keeps its own private copy, nothing shared) — nothing breaks.

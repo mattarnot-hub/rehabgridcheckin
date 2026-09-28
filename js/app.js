@@ -132,9 +132,6 @@
   function lockSvg() {
     return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>';
   }
-  function googleSvg() {
-    return '<svg viewBox="0 0 18 18" width="15" height="15"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.88 2.7-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.9v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.17.28-1.7V4.97H.9A9 9 0 0 0 0 9c0 1.45.35 2.83.9 4.03l3.05-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.46 3.44 1.35l2.58-2.58A9 9 0 0 0 .9 4.97l3.05 2.33C4.66 5.17 6.65 3.58 9 3.58z"/></svg>';
-  }
 
   function renderHistory() {
     var out = "";
@@ -219,7 +216,12 @@
       '</div>';
     }
     return '<div class="ownerbox">' +
-      '<button class="google-btn" id="signin-btn" type="button">' + googleSvg() + '<span>' + (cloud.signingIn ? "signing in…" : "Owner sign-in with Google") + '</span></button>' +
+      '<button class="link" id="signin-toggle" type="button">Owner sign-in</button>' +
+      '<form id="signin-form" hidden>' +
+        '<input type="email" id="signin-email" placeholder="email" autocomplete="username" required>' +
+        '<input type="password" id="signin-password" placeholder="password" autocomplete="current-password" required>' +
+        '<button type="submit">' + (cloud.signingIn ? "signing in…" : "sign in") + '</button>' +
+      '</form>' +
       (cloud.authError ? '<div class="auth-error">' + esc(cloud.authError) + '</div>' : '') +
     '</div>';
   }
@@ -390,17 +392,22 @@
     }
 
     // owner sign-in / sign-out
-    var signinBtn = document.getElementById("signin-btn");
-    if (signinBtn) {
-      signinBtn.addEventListener("click", function () {
+    var toggleBtn = document.getElementById("signin-toggle");
+    var form = document.getElementById("signin-form");
+    if (toggleBtn && form) {
+      toggleBtn.addEventListener("click", function () {
+        form.hidden = !form.hidden;
+        if (!form.hidden) document.getElementById("signin-email").focus();
+      });
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
         if (!cloud.auth || cloud.signingIn) return;
+        var email = document.getElementById("signin-email").value.trim();
+        var pass = document.getElementById("signin-password").value;
         cloud.signingIn = true;
         cloud.authError = "";
         render();
-        var provider = new firebase.auth.GoogleAuthProvider();
-        // Redirect (not popup): far more reliable on mobile browsers, which
-        // routinely block or kill JS-opened popups mid-flow.
-        cloud.auth.signInWithRedirect(provider).catch(function (err) {
+        cloud.auth.signInWithEmailAndPassword(email, pass).catch(function (err) {
           cloud.signingIn = false;
           cloud.authError = describeAuthError(err);
           console.error(err);
@@ -438,9 +445,11 @@
 
   function describeAuthError(err) {
     var code = err && err.code;
-    if (code === "auth/unauthorized-domain") return "This site isn’t on the Firebase Authorized domains list yet (" + code + ").";
-    if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") return "";
+    if (code === "auth/user-not-found" || code === "auth/wrong-password" || code === "auth/invalid-credential" || code === "auth/invalid-login-credentials") {
+      return "Sign-in failed — check the email and password.";
+    }
     if (code === "auth/network-request-failed") return "Network error during sign-in — check your connection and try again (" + code + ").";
+    if (code === "auth/too-many-requests") return "Too many attempts — wait a bit and try again.";
     return "Sign-in failed" + (code ? " (" + code + ")" : "") + " — please try again.";
   }
 
@@ -475,15 +484,6 @@
         cloud.isOwner = !!(user && user.email && ownerEmail && user.email.toLowerCase() === ownerEmail);
         cloud.authReady = true;
         cloud.signingIn = false;
-        render();
-      });
-
-      // Surfaces any error from a signInWithRedirect() round trip (e.g. an
-      // unauthorized domain) once the page reloads back from Google.
-      cloud.auth.getRedirectResult().catch(function (err) {
-        cloud.signingIn = false;
-        cloud.authError = describeAuthError(err);
-        console.error(err);
         render();
       });
     } catch (e) {
