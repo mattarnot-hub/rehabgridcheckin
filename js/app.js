@@ -398,17 +398,12 @@
         cloud.authError = "";
         render();
         var provider = new firebase.auth.GoogleAuthProvider();
-        cloud.auth.signInWithPopup(provider).catch(function (err) {
-          if (err && err.code === "auth/popup-closed-by-user") {
-            cloud.authError = "";
-          } else if (err && err.code === "auth/unauthorized-domain") {
-            cloud.authError = "This site isn’t on the Firebase Authorized domains list yet.";
-          } else {
-            cloud.authError = "Sign-in failed — please try again.";
-          }
-          console.error(err);
-        }).then(function () {
+        // Redirect (not popup): far more reliable on mobile browsers, which
+        // routinely block or kill JS-opened popups mid-flow.
+        cloud.auth.signInWithRedirect(provider).catch(function (err) {
           cloud.signingIn = false;
+          cloud.authError = describeAuthError(err);
+          console.error(err);
           render();
         });
       });
@@ -441,6 +436,14 @@
     }
   }
 
+  function describeAuthError(err) {
+    var code = err && err.code;
+    if (code === "auth/unauthorized-domain") return "This site isn’t on the Firebase Authorized domains list yet (" + code + ").";
+    if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") return "";
+    if (code === "auth/network-request-failed") return "Network error during sign-in — check your connection and try again (" + code + ").";
+    return "Sign-in failed" + (code ? " (" + code + ")" : "") + " — please try again.";
+  }
+
   // ---------- cloud boot ----------
   function initCloud() {
     if (!cloud.configured || typeof firebase === "undefined") { render(); return; }
@@ -471,6 +474,16 @@
         var ownerEmail = (window.OWNER_EMAIL || "").toLowerCase();
         cloud.isOwner = !!(user && user.email && ownerEmail && user.email.toLowerCase() === ownerEmail);
         cloud.authReady = true;
+        cloud.signingIn = false;
+        render();
+      });
+
+      // Surfaces any error from a signInWithRedirect() round trip (e.g. an
+      // unauthorized domain) once the page reloads back from Google.
+      cloud.auth.getRedirectResult().catch(function (err) {
+        cloud.signingIn = false;
+        cloud.authError = describeAuthError(err);
+        console.error(err);
         render();
       });
     } catch (e) {
