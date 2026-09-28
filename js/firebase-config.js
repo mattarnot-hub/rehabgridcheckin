@@ -32,12 +32,12 @@
 // browser keeps its own private copy, nothing shared) — nothing breaks.
 
 var REAL_CONFIG = {
-  apiKey: "REPLACE_ME",
-  authDomain: "REPLACE_ME",
-  projectId: "REPLACE_ME",
-  storageBucket: "REPLACE_ME",
-  messagingSenderId: "REPLACE_ME",
-  appId: "REPLACE_ME"
+  apiKey: "AIzaSyBpwHe9VhE5n9uBHun5rrj7ZviGZWl3PCY",
+  authDomain: "rehab-matt.firebaseapp.com",
+  projectId: "rehab-matt",
+  storageBucket: "rehab-matt.firebasestorage.app",
+  messagingSenderId: "784862064594",
+  appId: "1:784862064594:web:35aeec52c541d14e43e20b"
 };
 
 window.FIREBASE_CONFIG = (REAL_CONFIG.apiKey === "REPLACE_ME") ? null : REAL_CONFIG;
