@@ -1,0 +1,25 @@
+<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
+            <line x1="30" y1="200" x2="370" y2="200" stroke="#1B2A4E" stroke-width="3" stroke-linecap="round"/>
+            <g opacity="0.4">
+              <rect x="120" y="70" width="26" height="100" rx="13" fill="#5B6B8F"/>
+              <rect x="210" y="70" width="26" height="100" rx="13" fill="#5B6B8F"/>
+              <path d="M110 170 L156 170 L148 195 L118 195 Z" fill="#5B6B8F"/>
+              <path d="M200 170 L246 170 L238 195 L208 195 Z" fill="#5B6B8F"/>
+              <circle cx="178" cy="186" r="10" fill="#C89B3C"/>
+            </g>
+            <g transform="translate(0 -26)">
+              <rect x="120" y="70" width="26" height="100" rx="13" fill="#1B2A4E"/>
+              <rect x="210" y="70" width="26" height="100" rx="13" fill="#1B2A4E"/>
+              <path d="M112 170 Q 133 182 154 170 L150 195 L116 195 Z" fill="#1B2A4E"/>
+              <path d="M202 170 Q 223 182 244 170 L240 195 L206 195 Z" fill="#1B2A4E"/>
+              <circle cx="178" cy="186" r="10" fill="#C89B3C"/>
+            </g>
+            <path d="M133 170 C 133 140, 133 110, 133 90" fill="none" stroke="#C89B3C" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow4a)"/>
+            <path d="M223 170 C 223 140, 223 110, 223 90" fill="none" stroke="#C89B3C" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow4b)"/>
+            <defs>
+              <marker id="arrow4a" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+              <marker id="arrow4b" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+            </defs>
+            <text x="178" y="222" text-anchor="middle" font-size="14" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Ball squeezed between heels</text>
+            <text x="178" y="42" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Lift heels up</text>
+          </svg>

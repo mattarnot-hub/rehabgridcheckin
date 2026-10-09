@@ -46,7 +46,51 @@
         "Using your hand, gently spread the toes apart (splay).",
         "Then gently bend the toes downward (flexion) and hold briefly."
       ],
-      purpose: "Reduce tightness in the muscles on top of the foot and toes.", dose: "Time: 2 minutes" }
+      purpose: "Reduce tightness in the muscles on top of the foot and toes.", dose: "Time: 2 minutes" },
+    { id: "wristExt", n: 5, name: "Wrist Extension Lift", area: "Forearm / Wrist", when: "Seated at a table",
+      img: "assets/hep-5-wrist-extension-lift.svg", alt: "Forearm flat on a table, lifting the hand up at the wrist while holding a weight",
+      steps: [
+        "Sit at a table. Rest your forearm flat on it, palm facing down, with your elbow and forearm staying still the whole time.",
+        "Hold a 2 lb weight in your hand, which hangs just past the edge of the table.",
+        "Slowly lift the back of your hand up toward the ceiling, using only your wrist.",
+        "Lower under control back to flat. That's one rep."
+      ],
+      purpose: "Strengthens the tendons on the back of the forearm feeding into the wrist.", dose: "Weight: 2 lb &middot; Reps: 10 &middot; Sets: 3" },
+    { id: "wristFlex", n: 6, name: "Wrist Flexion Curl", area: "Forearm / Wrist", when: "Seated at a table",
+      img: "assets/hep-6-wrist-flexion-curl.svg", alt: "Forearm flat on a table, palm up, curling the hand up at the wrist while holding a weight",
+      steps: [
+        "Same setup, forearm flat on the table — this time turn your palm up and let your hand relax down slightly past the edge.",
+        "Hold the 2 lb weight. Keep your forearm and elbow still.",
+        "Curl your hand up toward you, bending only at the wrist.",
+        "Lower under control. That's one rep."
+      ],
+      purpose: "Strengthens the tendons on the palm side of the forearm, paired with the Extension Lift for balanced wrist support.", dose: "Weight: 2 lb &middot; Reps: 10 &middot; Sets: 3" },
+    { id: "wristStretch", n: 7, name: "Wrist Flexor Stretch", area: "Forearm / Wrist", when: "Any time",
+      img: "assets/hep-7-wrist-flexor-stretch.svg", alt: "Arm extended with the opposite hand gently pulling the fingers down and back",
+      steps: [
+        "Hold your right arm out in front of you, elbow straight, palm facing you, fingers pointing down.",
+        "With your left hand, gently grasp your right fingers and pull them down and back toward you.",
+        "You should feel a gentle stretch along the top of your forearm, not sharp pain.",
+        "Hold 20–30 seconds, then release slowly."
+      ],
+      purpose: "Keeps the forearm tendons mobile between strengthening sets.", dose: "Hold: 20&ndash;30 sec &middot; Reps: 2&ndash;3" },
+    { id: "heelBall", n: 8, name: "Ball-Squeeze Heel Raise", area: "Foot / Calf", when: "Standing",
+      img: "assets/hep-8-heel-ball-raise.svg", alt: "Standing heel raise with a small ball squeezed between the heels",
+      steps: [
+        "Stand with feet hip-width apart, holding onto a counter or chair for balance.",
+        "Squeeze a small ball between your heels — just enough pressure to hold it in place.",
+        "Keeping the ball squeezed the whole time, rise up onto the balls of your feet.",
+        "Lower slowly back down. That's one rep."
+      ],
+      purpose: "Builds calf strength while reinforcing straight heel alignment, which takes strain off the plantar fascia.", dose: "Reps: 20 &middot; Sets: 3" },
+    { id: "nightBoot", n: 9, name: "Night Dorsiflexion Boot", area: "Right Foot", when: "Overnight",
+      img: "assets/hep-9-night-dorsiflexion-boot.svg", alt: "Right foot held at a 90 degree angle in a night boot",
+      steps: [
+        "Before bed, put on the night boot on your right foot as shown by the clinic.",
+        "Check that your foot is held at a 90° angle to your shin, not pointed down.",
+        "Wear it through the night so the plantar fascia stays in a lengthened position while it heals."
+      ],
+      purpose: "Keeps the plantar fascia from tightening up overnight, which is what causes that first-step-in-the-morning pain.", dose: "Frequency: every night" }
   ];
 
   // ---------- offline cache (localStorage mirrors the last known shared record) ----------
@@ -238,7 +282,7 @@
           new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }) +
         '</span></div>' +
         '<h1>Matt&rsquo;s Recovery Plan</h1>' +
-        '<p class="lede">Main concern: <b>Plantar fasciitis</b>, with hamstring &amp; calf strength work. Daily home care keeps the gains from each in-clinic session.</p>' +
+        '<p class="lede">Main concern: <b>Plantar fasciitis</b>, with hamstring &amp; calf strength work. Also treating a new right wrist/forearm tendon injury. Daily home care keeps the gains from each in-clinic session.</p>' +
         renderSyncBadge() +
       '</div>' +
 
