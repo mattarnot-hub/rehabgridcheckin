@@ -114,7 +114,7 @@
   function pad(n) { return n < 10 ? "0" + n : "" + n; }
   function fmtDate(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
   function addDays(str, n) { var d = new Date(str + "T00:00:00"); d.setDate(d.getDate() + n); return d; }
-  function isComplete(rec) { return !!(rec && rec.calfBall && rec.footRoll); }
+  function isComplete(rec) { return !!(rec && rec.calfBall && rec.footRoll && rec.heelBall); }
 
   var state = loadCache();
   state.todayKey = fmtDate(new Date());
@@ -185,7 +185,7 @@
       var rec = state.logs[ds];
       var cls = "history-dot";
       if (isComplete(rec)) cls += " full";
-      else if (rec && (rec.calfBall || rec.footRoll)) cls += " half";
+      else if (rec && (rec.calfBall || rec.footRoll || rec.heelBall)) cls += " half";
       if (ds === state.todayKey) cls += " today";
       out += '<div class="history-day"><div class="' + cls + '"></div><span>' +
         d.toLocaleDateString(undefined, { weekday: "narrow" }) + "</span></div>";
@@ -272,7 +272,7 @@
 
   function render() {
     var today = state.logs[state.todayKey] || {};
-    var bothDone = isComplete(today);
+    var allDone = isComplete(today);
     var streak = computeStreak();
     var editable = canEdit();
 
@@ -295,7 +295,7 @@
       '</div>' +
 
       '<section>' +
-        '<div class="section-head"><h2>Today&rsquo;s Home Care</h2><span class="hint">' + (editable ? (bothDone ? "done for today ✓" : "tap to check off") : "Matt’s progress — read-only") + '</span></div>' +
+        '<div class="section-head"><h2>Today&rsquo;s Home Care</h2><span class="hint">' + (editable ? (allDone ? "done for today ✓" : "tap to check off") : "Matt’s progress — read-only") + '</span></div>' +
         '<div class="exercise-list">' +
           '<button class="exercise" data-key="calfBall" data-done="' + !!today.calfBall + '" type="button"' + (editable ? "" : " disabled") + '>' +
             '<span class="box">' + checkSvg() + '</span>' +
@@ -305,8 +305,12 @@
             '<span class="box">' + checkSvg() + '</span>' +
             '<span class="txt"><div class="name">Foot rolling</div><div class="why">Mobilizes the plantar fascia under the arch</div></span>' +
           '</button>' +
+          '<button class="exercise" data-key="heelBall" data-done="' + !!today.heelBall + '" type="button"' + (editable ? "" : " disabled") + '>' +
+            '<span class="box">' + checkSvg() + '</span>' +
+            '<span class="txt"><div class="name">Heel raise with ball</div><div class="why">Builds calf strength, takes strain off the plantar fascia</div></span>' +
+          '</button>' +
         '</div>' +
-        '<div class="note">From your Treatment Plan &mdash; At-Home Priorities. No other lifestyle changes were noted.</div>' +
+        '<div class="note">From your Treatment Plan &mdash; At-Home Priorities, plus the heel raise added Oct 9.</div>' +
       '</section>' +
 
       '<section>' +
