@@ -93,6 +93,9 @@
       purpose: "Keeps the plantar fascia from tightening up overnight, which is what causes that first-step-in-the-morning pain.", dose: "Frequency: every night" }
   ];
 
+  // Single source of truth for what counts toward a complete day: every HEP item.
+  var REQUIRED_DAILY = HEP.map(function (x) { return x.id; });
+
   // ---------- offline cache (localStorage mirrors the last known shared record) ----------
   function loadCache() {
     try {
@@ -114,9 +117,26 @@
   function pad(n) { return n < 10 ? "0" + n : "" + n; }
   function fmtDate(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
   function addDays(str, n) { var d = new Date(str + "T00:00:00"); d.setDate(d.getDate() + n); return d; }
-  function isComplete(rec) { return !!(rec && rec.calfBall && rec.footRoll && rec.heelBall); }
+  function isComplete(rec) {
+    if (!rec) return false;
+    for (var i = 0; i < REQUIRED_DAILY.length; i++) { if (!rec[REQUIRED_DAILY[i]]) return false; }
+    return true;
+  }
+  // Carries the pre-consolidation keys forward: Exercise 1 (calf) and
+  // Exercise 2 (plantar) are the exact same moves this app used to log as
+  // "calfBall" and "footRoll" before the full 9-item checklist existed.
+  function migrateLegacyKeys(logs) {
+    Object.keys(logs).forEach(function (date) {
+      var rec = logs[date];
+      if (!rec) return;
+      if (rec.calfBall && !rec.calf) rec.calf = rec.calfBall;
+      if (rec.footRoll && !rec.plantar) rec.plantar = rec.footRoll;
+    });
+    return logs;
+  }
 
   var state = loadCache();
+  migrateLegacyKeys(state.logs);
   state.todayKey = fmtDate(new Date());
 
   // ---------- cloud sync state ----------
@@ -185,7 +205,7 @@
       var rec = state.logs[ds];
       var cls = "history-dot";
       if (isComplete(rec)) cls += " full";
-      else if (rec && (rec.calfBall || rec.footRoll || rec.heelBall)) cls += " half";
+      else if (rec && REQUIRED_DAILY.some(function (id) { return rec[id]; })) cls += " half";
       if (ds === state.todayKey) cls += " today";
       out += '<div class="history-day"><div class="' + cls + '"></div><span>' +
         d.toLocaleDateString(undefined, { weekday: "narrow" }) + "</span></div>";
@@ -212,21 +232,32 @@
 
   function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
 
-  function renderHep() {
+  function renderHep(today) {
+    var editable = canEdit();
     var out = "";
     HEP.forEach(function (x) {
-      out += '<article class="hep card">' +
-        '<div class="hep-top"><span class="hep-num">' + x.n + '</span>' +
+      var done = !!today[x.id];
+      out += '<article class="hep card' + (done ? " done" : "") + '">' +
+        '<div class="hep-top">' +
+          '<button class="hep-check' + (done ? " done" : "") + '" data-key="' + x.id + '" type="button"' + (editable ? "" : " disabled") + ' aria-label="Mark ' + esc(x.name) + ' done today">' +
+            (done ? checkSvg() : x.n) +
+          '</button>' +
           '<div class="hep-title"><h3>' + x.name + '</h3>' +
           '<div class="hep-tags">' + (x.area ? '<span class="tag">' + x.area + '</span>' : '') + '<span class="tag when">' + x.when + '</span></div></div></div>' +
         '<img class="hep-img" src="' + x.img + '" alt="' + esc(x.alt) + '" width="1400" height="800" loading="lazy">' +
         '<ol class="hep-steps">' + x.steps.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ol>' +
         '<p class="hep-purpose"><b>Purpose:</b> ' + x.purpose + '</p>' +
         '<div class="hep-dose"><span>' + x.dose + '</span>' +
-          '<label>Frequency: <input type="text" class="freq" data-id="' + x.id + '" maxlength="40" placeholder="e.g. 2x daily" value="' + esc(state.freq[x.id] || "") + '"' + (canEdit() ? "" : " disabled") + '></label></div>' +
+          '<label>Frequency: <input type="text" class="freq" data-id="' + x.id + '" maxlength="40" placeholder="e.g. 2x daily" value="' + esc(state.freq[x.id] || "") + '"' + (editable ? "" : " disabled") + '></label></div>' +
       '</article>';
     });
     return out;
+  }
+
+  function hepProgressLabel(today) {
+    var done = HEP.filter(function (x) { return !!today[x.id]; }).length;
+    if (done === HEP.length) return "all done today ✓";
+    return done + " / " + HEP.length + " done today";
   }
 
   function planStartLabel() {
@@ -272,7 +303,6 @@
 
   function render() {
     var today = state.logs[state.todayKey] || {};
-    var allDone = isComplete(today);
     var streak = computeStreak();
     var editable = canEdit();
 
@@ -295,28 +325,9 @@
       '</div>' +
 
       '<section>' +
-        '<div class="section-head"><h2>Today&rsquo;s Home Care</h2><span class="hint">' + (editable ? (allDone ? "done for today ✓" : "tap to check off") : "Matt’s progress — read-only") + '</span></div>' +
-        '<div class="exercise-list">' +
-          '<button class="exercise" data-key="calfBall" data-done="' + !!today.calfBall + '" type="button"' + (editable ? "" : " disabled") + '>' +
-            '<span class="box">' + checkSvg() + '</span>' +
-            '<span class="txt"><div class="name">Calf ball release</div><div class="why">Eases calf tightness feeding the plantar fascia</div></span>' +
-          '</button>' +
-          '<button class="exercise" data-key="footRoll" data-done="' + !!today.footRoll + '" type="button"' + (editable ? "" : " disabled") + '>' +
-            '<span class="box">' + checkSvg() + '</span>' +
-            '<span class="txt"><div class="name">Foot rolling</div><div class="why">Mobilizes the plantar fascia under the arch</div></span>' +
-          '</button>' +
-          '<button class="exercise" data-key="heelBall" data-done="' + !!today.heelBall + '" type="button"' + (editable ? "" : " disabled") + '>' +
-            '<span class="box">' + checkSvg() + '</span>' +
-            '<span class="txt"><div class="name">Heel raise with ball</div><div class="why">Builds calf strength, takes strain off the plantar fascia</div></span>' +
-          '</button>' +
-        '</div>' +
-        '<div class="note">From your Treatment Plan &mdash; At-Home Priorities, plus the heel raise added Oct 9.</div>' +
-      '</section>' +
-
-      '<section>' +
-        '<div class="section-head"><h2>Home Exercise Program</h2><span class="hint">Karim Hanna, BKin, PT</span></div>' +
-        '<p class="hep-intro">Complete these exercises as prescribed. Mild pressure or stretch is expected; stop and contact us if you feel sharp pain, numbness or tingling.</p>' +
-        '<div class="hep-list">' + renderHep() + '</div>' +
+        '<div class="section-head"><h2>Home Exercise Program</h2><span class="hint">' + hepProgressLabel(today) + '</span></div>' +
+        '<p class="hep-intro">Complete these exercises as prescribed by Karim Hanna, BKin, PT. Mild pressure or stretch is expected; stop and contact us if you feel sharp pain, numbness or tingling. Tap the number on each card to check it off for today.</p>' +
+        '<div class="hep-list">' + renderHep(today) + '</div>' +
       '</section>' +
 
       '<section>' +
@@ -409,10 +420,10 @@
   }
 
   function wireEvents() {
-    var list = document.querySelector(".exercise-list");
-    if (list) {
-      list.addEventListener("click", function (e) {
-        var btn = e.target.closest(".exercise");
+    var hepList = document.querySelector(".hep-list");
+    if (hepList) {
+      hepList.addEventListener("click", function (e) {
+        var btn = e.target.closest(".hep-check");
         if (!btn || btn.disabled) return;
         toggle(btn.getAttribute("data-key"));
       });
@@ -515,7 +526,7 @@
         if (snap.exists) {
           var data = snap.data();
           // Never let a stale/empty cloud read blank out what the owner is mid-typing.
-          state.logs = data.logs || {};
+          state.logs = migrateLegacyKeys(data.logs || {});
           state.startDate = data.startDate || null;
           state.freq = data.freq || {};
           saveCache();
