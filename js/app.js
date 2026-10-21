@@ -206,17 +206,24 @@
     return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>';
   }
 
-  function renderHistory() {
+  function renderHistory(editable) {
     var out = "";
     for (var i = 6; i >= 0; i--) {
       var d = addDays(state.todayKey, -i);
       var ds = fmtDate(d);
       var rec = state.logs[ds];
+      var complete = isComplete(rec);
       var cls = "history-dot";
-      if (isComplete(rec)) cls += " full";
+      if (complete) cls += " full";
       else if (rec && REQUIRED_DAILY.some(function (id) { return rec[id]; })) cls += " half";
-      if (ds === state.todayKey) cls += " today";
-      out += '<div class="history-day"><div class="' + cls + '"></div><span>' +
+      var isToday = ds === state.todayKey;
+      if (isToday) cls += " today";
+      var canTap = editable && !isToday;
+      var tag = canTap ? "button" : "div";
+      var attrs = canTap
+        ? ' type="button" data-date="' + ds + '" aria-label="' + (complete ? "Clear" : "Mark") + ' all exercises for ' + esc(d.toLocaleDateString(undefined, { month: "short", day: "numeric" })) + '"'
+        : "";
+      out += '<div class="history-day"><' + tag + ' class="' + cls + '"' + attrs + '></' + tag + '><span>' +
         d.toLocaleDateString(undefined, { weekday: "narrow" }) + "</span></div>";
     }
     return out;
@@ -329,7 +336,7 @@
         '<span class="streak-num mono">' + streak + '</span>' +
         '<div class="streak-body">' +
           '<div class="streak-label">' + flameSvg() + '<span>day streak</span></div>' +
-          '<div class="history">' + renderHistory() + '</div>' +
+          '<div class="history">' + renderHistory(editable) + '</div>' +
         '</div>' +
       '</div>' +
 
@@ -428,7 +435,28 @@
     });
   }
 
+  // Owner-only: fill or clear every item for a PAST day in one tap, for
+  // retroactively correcting history (e.g. the checklist grew over time and
+  // an old day was really complete, just under fewer tracked items back then).
+  function setDayComplete(dateStr, complete) {
+    commit(function () {
+      var rec = Object.assign({}, state.logs[dateStr] || {});
+      REQUIRED_DAILY.forEach(function (id) { rec[id] = complete; });
+      rec.date = dateStr;
+      state.logs[dateStr] = rec;
+    });
+  }
+
   function wireEvents() {
+    var historyEl = document.querySelector(".history");
+    if (historyEl) {
+      historyEl.addEventListener("click", function (e) {
+        var dot = e.target.closest(".history-dot[data-date]");
+        if (!dot) return;
+        var ds = dot.getAttribute("data-date");
+        setDayComplete(ds, !isComplete(state.logs[ds]));
+      });
+    }
     var hepList = document.querySelector(".hep-list");
     if (hepList) {
       hepList.addEventListener("click", function (e) {

@@ -49,10 +49,12 @@ p.lede b { color: var(--ink); font-weight: 700; }
 .streak-label { font-weight: 700; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 .history { display: flex; gap: 6px; }
 .history-day { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.history-dot { width: 100%; aspect-ratio: 1; max-width: 26px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--card-2); }
+.history-dot { width: 100%; aspect-ratio: 1; max-width: 26px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--card-2); display: block; }
 .history-dot.half { background: linear-gradient(135deg, var(--accent) 50%, var(--card-2) 50%); border-color: var(--accent); }
 .history-dot.full { background: var(--accent); border-color: var(--accent); }
 .history-dot.today { box-shadow: 0 0 0 2px var(--flame-soft), 0 0 0 3.5px var(--flame); }
+button.history-dot { padding: 0; margin: 0; font: inherit; cursor: pointer; appearance: none; -webkit-appearance: none; }
+button.history-dot:hover { border-color: var(--accent); }
 .history-day span { font-size: 10px; color: var(--faint); font-weight: 700; }
 
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
