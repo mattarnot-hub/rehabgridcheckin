@@ -57,7 +57,7 @@
       ],
       purpose: "Builds calf strength while reinforcing straight heel alignment, which takes strain off the plantar fascia.", dose: "Reps: 20 &middot; Sets: 3" },
     { id: "lunge", n: 6, name: "Elevated Rear-Foot Lunge", area: "Hip / Leg", when: "Standing, back foot elevated",
-      img: "assets/hep-6-elevated-rear-foot-lunge.svg", alt: "Standing lunge with the back foot resting on an elevated surface such as a couch, crouching down and up on the front leg",
+      img: "assets/hep-6-elevated-rear-foot-lunge-v2.svg", alt: "Standing lunge with the back foot resting on an elevated surface such as a couch, crouching down and up on the front leg",
       steps: [
         "Stand a couple of feet in front of a couch or other sturdy elevated surface, facing away from it.",
         "Rest the top of your back foot on the elevated surface behind you.",
