@@ -48,7 +48,7 @@
       ],
       purpose: "Reduce tightness in the muscles on top of the foot and toes.", dose: "Time: 2 minutes" },
     { id: "heelBall", n: 5, name: "Ball-Squeeze Heel Raise", area: "Foot / Calf", when: "Standing",
-      img: "assets/hep-8-heel-ball-raise.svg", alt: "Standing heel raise with a small ball squeezed between the heels",
+      img: "assets/hep-5-heel-ball-raise-animated.svg", alt: "Animated standing heel raise with a small ball squeezed between the heels, looping up and down",
       steps: [
         "Stand with feet hip-width apart, holding onto a counter or chair for balance.",
         "Squeeze a small ball between your heels — just enough pressure to hold it in place.",
