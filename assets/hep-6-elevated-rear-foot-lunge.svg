@@ -1,20 +1,21 @@
 <svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
-  <line x1="20" y1="200" x2="380" y2="200" stroke="#1B2A4E" stroke-width="3" stroke-linecap="round"/>
-  <rect x="312" y="154" width="8" height="46" fill="#5B6B8F" opacity="0.5"/>
-  <rect x="283" y="140" width="72" height="16" rx="8" fill="#5B6B8F"/>
-  <circle cx="150" cy="58" r="17" fill="#1B2A4E"/>
-  <rect x="139" y="75" width="22" height="50" rx="11" fill="#1B2A4E"/>
-  <path d="M150 122 L180 158" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round" fill="none"/>
-  <path d="M180 158 L160 198" stroke="#1B2A4E" stroke-width="18" stroke-linecap="round" fill="none"/>
+  <line x1="20" y1="200" x2="370" y2="200" stroke="#1B2A4E" stroke-width="3" stroke-linecap="round"/>
+  <rect x="268" y="146" width="8" height="54" fill="#5B6B8F" opacity="0.5"/>
+  <rect x="238" y="130" width="72" height="16" rx="8" fill="#5B6B8F"/>
+  <path d="M180 121 L212 165" stroke="#5B6B8F" stroke-width="18" stroke-linecap="round" fill="none"/>
+  <path d="M212 165 L266 140" stroke="#5B6B8F" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <ellipse cx="267" cy="140" rx="13" ry="7" fill="#1B2A4E" transform="rotate(-15 267 140)"/>
+  <circle cx="180" cy="55" r="17" fill="#1B2A4E"/>
+  <rect x="169" y="73" width="22" height="48" rx="11" fill="#1B2A4E"/>
+  <path d="M180 121 L140 152" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round" fill="none"/>
+  <path d="M140 152 L160 198" stroke="#1B2A4E" stroke-width="18" stroke-linecap="round" fill="none"/>
   <ellipse cx="160" cy="201" rx="15" ry="7" fill="#1B2A4E"/>
-  <path d="M152 122 L300 148" stroke="#5B6B8F" stroke-width="16" stroke-linecap="round" fill="none"/>
-  <ellipse cx="301" cy="148" rx="14" ry="7" fill="#1B2A4E" transform="rotate(-10 301 148)"/>
-  <path d="M227 108 L227 178" stroke="#C89B3C" stroke-width="4" stroke-linecap="round" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>
+  <path d="M82 118 L82 182" stroke="#C89B3C" stroke-width="4" stroke-linecap="round" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>
   <defs>
     <marker id="arrowUp" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
     <marker id="arrowDown" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
   </defs>
-  <text x="227" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Crouch down &amp; up</text>
-  <text x="300" y="126" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Back foot elevated</text>
+  <text x="82" y="103" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Crouch down &amp; up</text>
+  <text x="274" y="118" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Back foot elevated</text>
   <text x="150" y="218" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Front leg does the work</text>
 </svg>
