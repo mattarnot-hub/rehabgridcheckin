@@ -57,7 +57,7 @@
       ],
       purpose: "Builds calf strength while reinforcing straight heel alignment, which takes strain off the plantar fascia.", dose: "Reps: 20 &middot; Sets: 3" },
     { id: "lunge", n: 6, name: "Elevated Rear-Foot Lunge", area: "Hip / Leg", when: "Standing, back foot elevated",
-      img: "assets/hep-6-elevated-rear-foot-lunge-v2.svg", alt: "Standing lunge with the back foot resting on an elevated surface such as a couch, crouching down and up on the front leg",
+      img: "assets/hep-6-lunge-animated.svg", alt: "Animated standing lunge with the back foot resting on an elevated surface such as a couch, looping the crouch down and up on the front leg",
       steps: [
         "Stand a couple of feet in front of a couch or other sturdy elevated surface, facing away from it.",
         "Rest the top of your back foot on the elevated surface behind you.",
@@ -66,7 +66,7 @@
       ],
       purpose: "Builds single-leg strength and control through the front hip and leg, supporting your return to volleyball and basketball.", dose: "Reps: 10 &middot; Sets: 2" },
     { id: "wristExt", n: 7, name: "Wrist Extension Lift", area: "Forearm / Wrist", when: "Seated at a table",
-      img: "assets/hep-5-wrist-extension-lift.svg", alt: "Forearm flat on a table, lifting the hand up at the wrist while holding a weight",
+      img: "assets/hep-7-wrist-extension-animated.svg", alt: "Animated forearm flat on a table, looping the hand lifting up at the wrist while holding a weight",
       steps: [
         "Sit at a table. Rest your forearm flat on it, palm facing down, with your elbow and forearm staying still the whole time.",
         "Hold a 2 lb weight in your hand, which hangs just past the edge of the table.",
@@ -74,17 +74,17 @@
         "Lower under control back to flat. That's one rep."
       ],
       purpose: "Strengthens the tendons on the back of the forearm feeding into the wrist.", dose: "Weight: 2 lb &middot; Reps: 10 &middot; Sets: 3" },
-    { id: "wristFlex", n: 8, name: "Wrist Flexion Curl", area: "Forearm / Wrist", when: "Seated at a table",
-      img: "assets/hep-6-wrist-flexion-curl.svg", alt: "Forearm flat on a table, palm up, curling the hand up at the wrist while holding a weight",
+    { id: "wristFlex", n: 8, name: "Thumb-Up Wrist Lift", area: "Forearm / Wrist", when: "Seated at a table",
+      img: "assets/hep-8-thumb-up-wrist-lift-animated.svg", alt: "Animated forearm flat on a table with the hand upright, thumb pointing up like starting a thumb war, looping side to side",
       steps: [
-        "Same setup, forearm flat on the table — this time turn your palm up and let your hand relax down slightly past the edge.",
-        "Hold the 2 lb weight. Keep your forearm and elbow still.",
-        "Curl your hand up toward you, bending only at the wrist.",
-        "Lower under control. That's one rep."
+        "Same setup, forearm flat on the table — this time make a fist with your thumb pointing straight up, like you're about to start a thumb war. Palm faces sideways, not up or down.",
+        "Hold the 2 lb weight in this grip. Keep your forearm and elbow still.",
+        "Keeping your palm vertical the whole time, lift your hand up, then lower it back down, moving only at the wrist.",
+        "That's one rep."
       ],
-      purpose: "Strengthens the tendons on the palm side of the forearm, paired with the Extension Lift for balanced wrist support.", dose: "Weight: 2 lb &middot; Reps: 10 &middot; Sets: 3" },
+      purpose: "Strengthens the wrist in the thumb-up plane, which loads the pinky-side tendons more directly than a flat-palm curl.", dose: "Weight: 2 lb &middot; Reps: 10 &middot; Sets: 3" },
     { id: "wristStretch", n: 9, name: "Wrist Flexor Stretch", area: "Forearm / Wrist", when: "Any time",
-      img: "assets/hep-7-wrist-flexor-stretch.svg", alt: "Arm extended with the opposite hand gently pulling the fingers down and back",
+      img: "assets/hep-9-wrist-stretch-animated.svg", alt: "Animated arm extended with the opposite hand gently pulling the fingers down and back in a slow hold-and-release loop",
       steps: [
         "Hold your right arm out in front of you, elbow straight, palm facing you, fingers pointing down.",
         "With your left hand, gently grasp your right fingers and pull them down and back toward you.",
@@ -93,7 +93,7 @@
       ],
       purpose: "Keeps the forearm tendons mobile between strengthening sets.", dose: "Hold: 20&ndash;30 sec &middot; Reps: 2&ndash;3" },
     { id: "nightBoot", n: 10, name: "Night Dorsiflexion Boot", area: "Right Foot", when: "Overnight",
-      img: "assets/hep-9-night-dorsiflexion-boot.svg", alt: "Right foot held at a 90 degree angle in a night boot",
+      img: "assets/hep-10-night-boot-animated.svg", alt: "Right foot held at a 90 degree angle in a night boot, with a soft ambient zzz pulse",
       steps: [
         "Before bed, put on the night boot on your right foot as shown by the clinic.",
         "Check that your foot is held at a 90° angle to your shin, not pointed down.",

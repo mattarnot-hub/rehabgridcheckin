@@ -1,0 +1,38 @@
+<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes wristDeviate {
+      0%, 10%  { transform: rotate(-18deg); }
+      45%, 55% { transform: rotate(18deg); }
+      92%,100% { transform: rotate(-18deg); }
+    }
+    .hand-wrap { transform-origin: 225px 163px; animation: wristDeviate 2.6s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .hand-wrap { animation: none; transform: rotate(18deg); }
+    }
+  </style>
+  <line x1="30" y1="185" x2="370" y2="185" stroke="#1B2A4E" stroke-width="3" stroke-linecap="round"/>
+  <g stroke="#1B2A4E" stroke-width="2">
+    <line x1="55" y1="188" x2="47" y2="195"/><line x1="80" y1="188" x2="72" y2="195"/>
+    <line x1="105" y1="188" x2="97" y2="195"/><line x1="130" y1="188" x2="122" y2="195"/>
+  </g>
+  <rect x="75" y="150" width="150" height="26" rx="13" fill="#5B6B8F"/>
+  <circle cx="88" cy="163" r="11" fill="#1B2A4E"/>
+  <g class="hand-wrap">
+    <rect x="215" y="118" width="20" height="45" rx="10" fill="#1B2A4E"/>
+    <ellipse cx="212" cy="109" rx="7" ry="11" fill="#1B2A4E" transform="rotate(-18 212 109)"/>
+    <g transform="translate(225 92) rotate(90)">
+      <circle r="13" fill="none" stroke="#C89B3C" stroke-width="5"/>
+      <circle cx="-26" cy="0" r="9" fill="#C89B3C"/>
+      <circle cx="26" cy="0" r="9" fill="#C89B3C"/>
+      <rect x="-26" y="-3" width="52" height="6" fill="#C89B3C"/>
+    </g>
+  </g>
+  <path d="M260 155 C 278 145, 285 125, 283 100" fill="none" stroke="#C89B3C" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow2)"/>
+  <defs>
+    <marker id="arrow2" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/>
+    </marker>
+  </defs>
+  <text x="150" y="220" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Palm vertical, thumb up</text>
+  <text x="300" y="70" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Lift hand up &amp; down</text>
+</svg>

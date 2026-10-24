@@ -1,0 +1,46 @@
+<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes toDown { 0%,8%{opacity:1} 45%,55%{opacity:0} 92%,100%{opacity:1} }
+    @keyframes toUp   { 0%,8%{opacity:0} 45%,55%{opacity:1} 92%,100%{opacity:0} }
+    .pose-down { animation: toDown 2.6s ease-in-out infinite; }
+    .pose-up   { animation: toUp   2.6s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .pose-down, .pose-up { animation: none; }
+      .pose-down { opacity: 1; }
+      .pose-up { opacity: 0; }
+    }
+  </style>
+
+  <line x1="20" y1="200" x2="370" y2="200" stroke="#1B2A4E" stroke-width="3" stroke-linecap="round"/>
+  <rect x="268" y="146" width="8" height="54" fill="#5B6B8F" opacity="0.5"/>
+  <rect x="238" y="130" width="72" height="16" rx="8" fill="#5B6B8F"/>
+  <ellipse cx="267" cy="140" rx="13" ry="7" fill="#1B2A4E" transform="rotate(-15 267 140)"/>
+  <ellipse cx="160" cy="201" rx="15" ry="7" fill="#1B2A4E"/>
+
+  <g class="pose-down">
+    <path d="M180 121 L212 165" stroke="#5B6B8F" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <path d="M212 165 L266 140" stroke="#5B6B8F" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <circle cx="180" cy="55" r="17" fill="#1B2A4E"/>
+    <rect x="169" y="73" width="22" height="48" rx="11" fill="#1B2A4E"/>
+    <path d="M180 121 L140 152" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round" fill="none"/>
+    <path d="M140 152 L160 198" stroke="#1B2A4E" stroke-width="18" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <g class="pose-up">
+    <path d="M180 99 L225 128" stroke="#5B6B8F" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <path d="M225 128 L266 140" stroke="#5B6B8F" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <circle cx="180" cy="33" r="17" fill="#1B2A4E"/>
+    <rect x="169" y="51" width="22" height="48" rx="11" fill="#1B2A4E"/>
+    <path d="M180 99 L168 148" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round" fill="none"/>
+    <path d="M168 148 L160 198" stroke="#1B2A4E" stroke-width="18" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <path d="M82 118 L82 182" stroke="#C89B3C" stroke-width="4" stroke-linecap="round" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>
+  <defs>
+    <marker id="arrowUp" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+    <marker id="arrowDown" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+  </defs>
+  <text x="82" y="103" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Crouch down &amp; up</text>
+  <text x="274" y="118" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Back foot elevated</text>
+  <text x="150" y="218" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Front leg does the work</text>
+</svg>

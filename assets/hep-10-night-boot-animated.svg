@@ -1,0 +1,33 @@
+<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* Not a movement exercise -- the foot is meant to stay still, held at
+       90 degrees, all night. The leg/boot never animate; only a soft
+       ambient "sleeping" pulse on the zzz mark. */
+    @keyframes zzzPulse {
+      0%, 100% { opacity: 0.35; transform: translateY(0); }
+      50%      { opacity: 1;    transform: translateY(-4px); }
+    }
+    .zzz-mark { animation: zzzPulse 2.4s ease-in-out infinite; transform-origin: 90px 20px; }
+    @media (prefers-reduced-motion: reduce) {
+      .zzz-mark { animation: none; opacity: 1; }
+    }
+  </style>
+  <path d="M150 40 C 230 50, 255 90, 250 140 L 250 150" fill="none" stroke="#1B2A4E" stroke-width="22" stroke-linecap="round"/>
+  <path d="M250 150 L 320 150" fill="none" stroke="#1B2A4E" stroke-width="22" stroke-linecap="round"/>
+  <path d="M135 30 C 225 38, 262 82, 258 142 L 260 162 L 335 162 L 330 130 C 336 78, 290 28, 150 18 Z"
+        fill="none" stroke="#C89B3C" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
+  <g stroke="#1B2A4E" stroke-width="3" stroke-linecap="round">
+    <line x1="250" y1="150" x2="250" y2="130"/>
+    <line x1="250" y1="150" x2="270" y2="150"/>
+  </g>
+  <path d="M260 120 A 22 22 0 0 1 282 142" fill="none" stroke="#C89B3C" stroke-width="3"/>
+  <text x="292" y="135" font-size="14" font-weight="800" fill="#C89B3C" font-family="system-ui,sans-serif">90&#176;</text>
+  <g class="zzz-mark">
+    <g transform="translate(60 55)" stroke="#5B6B8F" stroke-width="3" fill="none" stroke-linecap="round">
+      <path d="M0 30 Q 15 -5, 45 10"/>
+      <path d="M8 24 Q 20 2, 42 14"/>
+    </g>
+    <text x="90" y="30" font-size="13" font-weight="700" fill="#5B6B8F" font-family="system-ui,sans-serif">zzz</text>
+  </g>
+  <text x="200" y="205" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Right foot held at 90&#176;, worn to bed</text>
+</svg>
