@@ -69,20 +69,20 @@
       img: "assets/hep-7-wrist-extension-animated.svg", alt: "Animated forearm flat on a table, looping the hand lifting up at the wrist while holding a weight",
       steps: [
         "Sit at a table. Rest your forearm flat on it, palm facing down, with your elbow and forearm staying still the whole time.",
-        "Hold a 2 lb weight in your hand, which hangs just past the edge of the table.",
+        "Hold a 5 lb weight in your hand, which hangs just past the edge of the table.",
         "Slowly lift the back of your hand up toward the ceiling, using only your wrist.",
         "Lower under control back to flat. That's one rep."
       ],
-      purpose: "Strengthens the tendons on the back of the forearm feeding into the wrist.", dose: "Weight: 2 lb &middot; Reps: 10 &middot; Sets: 3" },
+      purpose: "Strengthens the tendons on the back of the forearm feeding into the wrist.", dose: "Weight: 5 lb &middot; Reps: 10 &middot; Sets: 3" },
     { id: "wristFlex", n: 8, name: "Thumb-Up Wrist Lift", area: "Forearm / Wrist", when: "Seated at a table",
       img: "assets/hep-8-thumb-up-wrist-lift-animated.svg", alt: "Animated forearm flat on a table with the hand upright, thumb pointing up like starting a thumb war, looping side to side",
       steps: [
         "Same setup, forearm flat on the table — this time make a fist with your thumb pointing straight up, like you're about to start a thumb war. Palm faces sideways, not up or down.",
-        "Hold the 2 lb weight in this grip. Keep your forearm and elbow still.",
+        "Hold the 5 lb weight in this grip. Keep your forearm and elbow still.",
         "Keeping your palm vertical the whole time, lift your hand up, then lower it back down, moving only at the wrist.",
         "That's one rep."
       ],
-      purpose: "Strengthens the wrist in the thumb-up plane, which loads the pinky-side tendons more directly than a flat-palm curl.", dose: "Weight: 2 lb &middot; Reps: 10 &middot; Sets: 3" },
+      purpose: "Strengthens the wrist in the thumb-up plane, which loads the pinky-side tendons more directly than a flat-palm curl.", dose: "Weight: 5 lb &middot; Reps: 10 &middot; Sets: 3" },
     { id: "wristStretch", n: 9, name: "Wrist Flexor Stretch", area: "Forearm / Wrist", when: "Any time",
       img: "assets/hep-9-wrist-stretch-animated.svg", alt: "Animated arm extended with the opposite hand gently pulling the fingers down and back in a slow hold-and-release loop",
       steps: [
@@ -92,7 +92,16 @@
         "Hold 20–30 seconds, then release slowly."
       ],
       purpose: "Keeps the forearm tendons mobile between strengthening sets.", dose: "Hold: 20&ndash;30 sec &middot; Reps: 2&ndash;3" },
-    { id: "nightBoot", n: 10, name: "Night Dorsiflexion Boot", area: "Right Foot", when: "Overnight",
+    { id: "pronationBand", n: 10, name: "Resisted Forearm Pronation", area: "Forearm / Wrist", when: "Seated at a table",
+      img: "assets/hep-10-band-pronation-animated.svg", alt: "Animated forearm flat on a table holding a resistance band, rotating the pinky side of the hand up and to the left against the band",
+      steps: [
+        "Sit at a table. Rest your forearm flat on it, holding one end of a resistance band in a neutral grip (thumb up), with the other end anchored or held taut to your left.",
+        "Keeping your forearm and elbow still, rotate your wrist so the pinky side of your hand rotates up and to the left, against the band's resistance.",
+        "Slowly control the rotation back to the start. That's one rep."
+      ],
+      purpose: "Strengthens the forearm pronator muscles on the pinky side — a likely muscular (not tendon) source of the discomfort there. Mild discomfort is expected; stop if it sharpens.",
+      dose: "Reps: 12 &middot; Sets: 2" },
+    { id: "nightBoot", n: 11, name: "Night Dorsiflexion Boot", area: "Right Foot", when: "Overnight",
       img: "assets/hep-10-night-boot-animated.svg", alt: "Right foot held at a 90 degree angle in a night boot, with a soft ambient zzz pulse",
       steps: [
         "Before bed, put on the night boot on your right foot as shown by the clinic.",
