@@ -15,12 +15,15 @@
   <line x1="20" y1="200" x2="380" y2="200" stroke="#1B2A4E" stroke-width="3" stroke-linecap="round"/>
 
   <!-- seated upper body, leaning back on a support arm -->
-  <path d="M50 148 L24 196" stroke="#5B6B8F" stroke-width="10" stroke-linecap="round"/>
-  <circle cx="55" cy="120" r="16" fill="#1B2A4E"/>
-  <path d="M55 136 Q 46 158 60 178" fill="none" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round"/>
+  <path d="M46 142 L18 196" stroke="#5B6B8F" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="52" cy="110" r="16" fill="#1B2A4E"/>
+  <path d="M52 126 Q 40 155 50 190" fill="none" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- bum on the ground: the hip bend joining torso and leg -->
+  <ellipse cx="58" cy="196" rx="18" ry="11" fill="#1B2A4E"/>
 
   <!-- leg resting along the ball -->
-  <path d="M60 178 L150 182 L320 178" fill="none" stroke="#1B2A4E" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M58 196 L150 183 L320 178" fill="none" stroke="#1B2A4E" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="230" cy="196" r="16" fill="#C89B3C"/>
   <circle cx="320" cy="178" r="6" fill="#1B2A4E"/>
 

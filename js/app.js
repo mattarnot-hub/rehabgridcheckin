@@ -14,7 +14,7 @@
   // Home Exercise Program (from the clinic's Home_Exercise_Program handout)
   var HEP = [
     { id: "calf", n: 1, name: "Calf Pin-and-Stretch", area: "Foot / Calf", when: "Any time of day",
-      img: "assets/hep-1-calf-pin-and-stretch-animated.svg", alt: "Animated seated figure with a ball under the calf, foot pumping up and down at the ankle",
+      img: "assets/hep-1-calf-pin-and-stretch-animated-v2.svg", alt: "Animated seated figure with bum on the ground, hip bent to connect torso and leg, ball under the calf, foot pumping up and down at the ankle",
       steps: [
         "Sit on a hard floor with a lacrosse ball (or similar firm ball) under your calf.",
         "Rest the weight of your leg on the ball to pin the calf muscle.",
