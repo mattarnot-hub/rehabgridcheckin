@@ -14,7 +14,7 @@
   // Home Exercise Program (from the clinic's Home_Exercise_Program handout)
   var HEP = [
     { id: "calf", n: 1, name: "Calf Pin-and-Stretch", area: "Foot / Calf", when: "Any time of day",
-      img: "assets/hep-1-calf-pin-and-stretch.png", alt: "Seated with a ball under the calf, pumping the ankle up and down",
+      img: "assets/hep-1-calf-pin-and-stretch-animated.svg", alt: "Animated seated figure with a ball under the calf, foot pumping up and down at the ankle",
       steps: [
         "Sit on a hard floor with a lacrosse ball (or similar firm ball) under your calf.",
         "Rest the weight of your leg on the ball to pin the calf muscle.",
@@ -23,7 +23,7 @@
       ],
       purpose: "Release calf tension and improve ankle mobility.", dose: "Time: 2 minutes" },
     { id: "plantar", n: 2, name: "Plantar Fascia Rolling", area: "", when: "End of day",
-      img: "assets/hep-2-plantar-fascia-rolling.png", alt: "Seated in a chair rolling a ball under the arch of the foot from heel to ball",
+      img: "assets/hep-2-plantar-fascia-rolling-animated.svg", alt: "Animated figure seated in a chair, a ball rolling under the arch of the foot from heel to ball",
       steps: [
         "Sit in a chair with a ball under the sole of your foot.",
         "Roll gently from the heel to the ball of the foot, covering the entire sole.",
@@ -31,7 +31,7 @@
       ],
       purpose: "Reduce tension along the underside of the foot.", dose: "Time: 2 minutes" },
     { id: "hamstring", n: 3, name: "Hamstring Loading with Band", area: "Hip / Hamstring", when: "Lying on your back",
-      img: "assets/hep-3-hamstring-loading-band.png", alt: "Lying on the back, driving the heel down against a band while turning the ankle in and out",
+      img: "assets/hep-3-hamstring-loading-band-animated.svg", alt: "Animated figure lying on the back, driving the heel down against a band while turning the ankle in and out",
       steps: [
         "Lie on your back with the resistance band positioned as shown in clinic.",
         "Drive your heel down into the floor against the band.",
@@ -40,7 +40,7 @@
       ],
       purpose: "Improve hamstring activation and ankle range of motion together.", dose: "Sets: 4 &middot; Reps: 8" },
     { id: "toes", n: 4, name: "Toe Mobility", area: "", when: "End of day",
-      img: "assets/hep-4-toe-mobility.png", alt: "Spreading the toes apart, then curling them down and straightening",
+      img: "assets/hep-4-toe-mobility-animated.svg", alt: "Animated foot diagrams: toes spreading apart, and toes curling downward then straightening",
       steps: [
         "Sit with your foot resting on the opposite knee.",
         "Using your hand, gently spread the toes apart (splay).",

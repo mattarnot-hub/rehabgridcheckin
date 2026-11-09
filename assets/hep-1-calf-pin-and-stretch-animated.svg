@@ -1,0 +1,39 @@
+<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes pumpFoot {
+      0%, 10%  { transform: rotate(0deg); }
+      35%, 45% { transform: rotate(-24deg); }
+      65%, 75% { transform: rotate(26deg); }
+      92%,100% { transform: rotate(0deg); }
+    }
+    .foot-pivot { transform-origin: 320px 178px; animation: pumpFoot 2.8s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .foot-pivot { animation: none; transform: rotate(-20deg); }
+    }
+  </style>
+
+  <line x1="20" y1="200" x2="380" y2="200" stroke="#1B2A4E" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- seated upper body, leaning back on a support arm -->
+  <path d="M50 148 L24 196" stroke="#5B6B8F" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="55" cy="120" r="16" fill="#1B2A4E"/>
+  <path d="M55 136 Q 46 158 60 178" fill="none" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- leg resting along the ball -->
+  <path d="M60 178 L150 182 L320 178" fill="none" stroke="#1B2A4E" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="230" cy="196" r="16" fill="#C89B3C"/>
+  <circle cx="320" cy="178" r="6" fill="#1B2A4E"/>
+
+  <g class="foot-pivot">
+    <path d="M320 178 L366 174 L360 196 L326 196 Z" fill="#1B2A4E"/>
+  </g>
+
+  <path d="M372 150 L372 196" stroke="#C89B3C" stroke-width="4" stroke-linecap="round" marker-start="url(#arrowUp1)" marker-end="url(#arrowDown1)"/>
+  <defs>
+    <marker id="arrowUp1" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+    <marker id="arrowDown1" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+  </defs>
+
+  <text x="396" y="134" text-anchor="end" font-size="13" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Pump ankle</text>
+  <text x="230" y="222" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Ball under calf</text>
+</svg>

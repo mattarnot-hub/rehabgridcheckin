@@ -1,0 +1,50 @@
+<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes rollBall {
+      0%, 10%  { transform: translateX(0); }
+      45%, 55% { transform: translateX(38px); }
+      92%,100% { transform: translateX(0); }
+    }
+    @keyframes rockFoot {
+      0%, 10%  { transform: rotate(0deg); }
+      45%, 55% { transform: rotate(-9deg); }
+      92%,100% { transform: rotate(0deg); }
+    }
+    .ball-roll  { transform-origin: 280px 190px; animation: rollBall 2.8s ease-in-out infinite; }
+    .foot-rock  { transform-origin: 266px 198px; animation: rockFoot 2.8s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .ball-roll, .foot-rock { animation: none; }
+      .ball-roll { transform: translateX(19px); }
+    }
+  </style>
+
+  <line x1="20" y1="205" x2="380" y2="205" stroke="#1B2A4E" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- chair -->
+  <line x1="70" y1="55" x2="70" y2="168" stroke="#93A0C2" stroke-width="8" stroke-linecap="round"/>
+  <rect x="60" y="165" width="95" height="14" rx="4" fill="#93A0C2"/>
+
+  <!-- seated person -->
+  <circle cx="150" cy="78" r="16" fill="#1B2A4E"/>
+  <path d="M150 94 L158 166" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round"/>
+  <path d="M152 100 L205 148" stroke="#5B6B8F" stroke-width="10" stroke-linecap="round"/>
+  <path d="M158 166 L222 180" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round"/>
+  <path d="M222 180 L266 196" stroke="#1B2A4E" stroke-width="18" stroke-linecap="round"/>
+
+  <g class="foot-rock">
+    <path d="M262 192 L330 188 L326 206 L258 206 Z" fill="#1B2A4E"/>
+  </g>
+
+  <g class="ball-roll">
+    <circle cx="280" cy="190" r="15" fill="#C89B3C"/>
+  </g>
+
+  <path d="M265 150 L310 150" stroke="#C89B3C" stroke-width="4" stroke-linecap="round" marker-start="url(#arrowL2)" marker-end="url(#arrowR2)"/>
+  <defs>
+    <marker id="arrowL2" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+    <marker id="arrowR2" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+  </defs>
+
+  <text x="287" y="138" text-anchor="middle" font-size="14" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Roll heel to ball</text>
+  <text x="150" y="222" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Ball under arch of foot</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes splayBig   { 0%,10%{transform:translate(0,0)} 45%,55%{transform:translate(-8px,-6px)} 92%,100%{transform:translate(0,0)} }
+    @keyframes splayIn1   { 0%,10%{transform:translate(0,0)} 45%,55%{transform:translate(-4px,-7px)} 92%,100%{transform:translate(0,0)} }
+    @keyframes splayMid   { 0%,10%{transform:translate(0,0)} 45%,55%{transform:translate(0,-8px)}    92%,100%{transform:translate(0,0)} }
+    @keyframes splayIn2   { 0%,10%{transform:translate(0,0)} 45%,55%{transform:translate(4px,-7px)}  92%,100%{transform:translate(0,0)} }
+    @keyframes splaySmall { 0%,10%{transform:translate(0,0)} 45%,55%{transform:translate(8px,-5px)}  92%,100%{transform:translate(0,0)} }
+    @keyframes curlToes   { 0%,10%{transform:rotate(0deg)} 45%,55%{transform:rotate(55deg)} 92%,100%{transform:rotate(0deg)} }
+
+    .toe-1 { animation: splayBig   2.6s ease-in-out infinite; }
+    .toe-2 { animation: splayIn1   2.6s ease-in-out infinite; }
+    .toe-3 { animation: splayMid   2.6s ease-in-out infinite; }
+    .toe-4 { animation: splayIn2   2.6s ease-in-out infinite; }
+    .toe-5 { animation: splaySmall 2.6s ease-in-out infinite; }
+    .curl-wrap { transform-origin: 320px 169px; animation: curlToes 2.6s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .toe-1, .toe-2, .toe-3, .toe-4, .toe-5, .curl-wrap { animation: none; }
+      .curl-wrap { transform: rotate(40deg); }
+    }
+  </style>
+
+  <line x1="200" y1="20" x2="200" y2="200" stroke="#D9D2BE" stroke-width="2" stroke-dasharray="4 5"/>
+
+  <!-- panel 1: spread toes apart -->
+  <ellipse cx="100" cy="160" rx="34" ry="52" fill="#1B2A4E"/>
+  <g class="toe-1"><ellipse cx="60" cy="118" rx="14" ry="19" fill="#1B2A4E"/></g>
+  <g class="toe-2"><ellipse cx="80" cy="105" rx="11" ry="16" fill="#1B2A4E"/></g>
+  <g class="toe-3"><ellipse cx="100" cy="100" rx="10" ry="15" fill="#1B2A4E"/></g>
+  <g class="toe-4"><ellipse cx="120" cy="105" rx="10" ry="14" fill="#1B2A4E"/></g>
+  <g class="toe-5"><ellipse cx="138" cy="116" rx="8" ry="12" fill="#1B2A4E"/></g>
+
+  <!-- panel 2: curl toes down -->
+  <path d="M232 160 L320 152 L320 178 L240 182 Z" fill="#1B2A4E"/>
+  <g class="curl-wrap">
+    <path d="M320 152 L352 148 L352 178 L320 178 Z" fill="#1B2A4E"/>
+  </g>
+
+  <text x="100" y="40" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">1. Spread toes apart</text>
+  <text x="300" y="40" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">2. Curl toes down</text>
+  <text x="300" y="215" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5B6B8F" font-family="system-ui,sans-serif">(then straighten and repeat)</text>
+</svg>
