@@ -1,0 +1,53 @@
+<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes rollBall {
+      0%, 10%  { transform: translateX(0); }
+      45%, 55% { transform: translateX(35px); }
+      92%,100% { transform: translateX(0); }
+    }
+    @keyframes rockFoot {
+      0%, 10%  { transform: rotate(-6deg); }
+      45%, 55% { transform: rotate(6deg); }
+      92%,100% { transform: rotate(-6deg); }
+    }
+    .ball-roll  { transform-origin: 165px 195px; animation: rollBall 2.8s ease-in-out infinite; }
+    .foot-rock  { transform-origin: 150px 183px; animation: rockFoot 2.8s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .ball-roll, .foot-rock { animation: none; }
+      .ball-roll { transform: translateX(18px); }
+      .foot-rock { transform: rotate(0deg); }
+    }
+  </style>
+
+  <line x1="20" y1="210" x2="380" y2="210" stroke="#1B2A4E" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- chair, person seated all the way back against the backrest -->
+  <line x1="50" y1="25" x2="50" y2="157" stroke="#93A0C2" stroke-width="8" stroke-linecap="round"/>
+  <rect x="41" y="143" width="105" height="14" rx="4" fill="#93A0C2"/>
+
+  <!-- seated person: hips at the back of the seat, shin vertical to the floor -->
+  <circle cx="65" cy="40" r="15" fill="#1B2A4E"/>
+  <path d="M65 55 L65 146" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round"/>
+  <path d="M69 65 L130 145" stroke="#5B6B8F" stroke-width="10" stroke-linecap="round"/>
+  <path d="M65 146 L150 150" stroke="#1B2A4E" stroke-width="20" stroke-linecap="round"/>
+  <path d="M150 150 L150 183" stroke="#1B2A4E" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- ball, resting on the floor, mostly visible below the sole -->
+  <g class="ball-roll">
+    <circle cx="165" cy="195" r="15" fill="#C89B3C"/>
+  </g>
+
+  <!-- sole, thin and flat, resting on top of the ball -->
+  <g class="foot-rock">
+    <path d="M150 183 L215 177 L213 188 L146 193 Z" fill="#1B2A4E"/>
+  </g>
+
+  <path d="M225 140 L270 140" stroke="#C89B3C" stroke-width="4" stroke-linecap="round" marker-start="url(#arrowL2)" marker-end="url(#arrowR2)"/>
+  <defs>
+    <marker id="arrowL2" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+    <marker id="arrowR2" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#C89B3C"/></marker>
+  </defs>
+
+  <text x="247" y="126" text-anchor="middle" font-size="14" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Roll heel to ball</text>
+  <text x="180" y="222" text-anchor="middle" font-size="15" font-weight="700" fill="#1B2A4E" font-family="system-ui,sans-serif">Ball under arch of foot</text>
+</svg>

@@ -23,7 +23,7 @@
       ],
       purpose: "Release calf tension and improve ankle mobility.", dose: "Time: 2 minutes" },
     { id: "plantar", n: 2, name: "Plantar Fascia Rolling", area: "", when: "End of day",
-      img: "assets/hep-2-plantar-fascia-rolling-animated.svg", alt: "Animated figure seated in a chair, a ball rolling under the arch of the foot from heel to ball",
+      img: "assets/hep-2-plantar-fascia-rolling-animated-v2.svg", alt: "Animated figure seated upright with hips at the back of the chair and shin vertical to the floor, a ball rolling under the arch of the foot from heel to ball",
       steps: [
         "Sit in a chair with a ball under the sole of your foot.",
         "Roll gently from the heel to the ball of the foot, covering the entire sole.",
