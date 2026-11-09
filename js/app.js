@@ -13,7 +13,7 @@
 
   // Home Exercise Program (from the clinic's Home_Exercise_Program handout)
   var HEP = [
-    { id: "calf", n: 1, name: "Calf Pin-and-Stretch", area: "Foot / Calf", when: "Any time of day",
+    { id: "calf", n: 1, addedOn: "2026-09-26", name: "Calf Pin-and-Stretch", area: "Foot / Calf", when: "Any time of day",
       img: "assets/hep-1-calf-pin-and-stretch-animated-v2.svg", alt: "Animated seated figure with bum on the ground, hip bent to connect torso and leg, ball under the calf, foot pumping up and down at the ankle",
       steps: [
         "Sit on a hard floor with a lacrosse ball (or similar firm ball) under your calf.",
@@ -22,7 +22,7 @@
         "Move the ball to a new spot along the calf and repeat. Avoid placing the ball directly behind the knee."
       ],
       purpose: "Release calf tension and improve ankle mobility.", dose: "Time: 2 minutes" },
-    { id: "plantar", n: 2, name: "Plantar Fascia Rolling", area: "", when: "End of day",
+    { id: "plantar", n: 2, addedOn: "2026-09-26", name: "Plantar Fascia Rolling", area: "", when: "End of day",
       img: "assets/hep-2-plantar-fascia-rolling-animated-v2.svg", alt: "Animated figure seated upright with hips at the back of the chair and shin vertical to the floor, a ball rolling under the arch of the foot from heel to ball",
       steps: [
         "Sit in a chair with a ball under the sole of your foot.",
@@ -30,7 +30,7 @@
         "Keep the pressure light to moderate."
       ],
       purpose: "Reduce tension along the underside of the foot.", dose: "Time: 2 minutes" },
-    { id: "hamstring", n: 3, name: "Hamstring Loading with Band", area: "Hip / Hamstring", when: "Lying on your back",
+    { id: "hamstring", n: 3, addedOn: "2026-09-26", name: "Hamstring Loading with Band", area: "Hip / Hamstring", when: "Lying on your back",
       img: "assets/hep-3-hamstring-loading-band-animated.svg", alt: "Animated figure lying on the back, driving the heel down against a band while turning the ankle in and out",
       steps: [
         "Lie on your back with the resistance band positioned as shown in clinic.",
@@ -39,7 +39,7 @@
         "Release slowly. Take your time on the way back; the slow release is the most important part."
       ],
       purpose: "Improve hamstring activation and ankle range of motion together.", dose: "Sets: 4 &middot; Reps: 8" },
-    { id: "toes", n: 4, name: "Toe Mobility", area: "", when: "End of day",
+    { id: "toes", n: 4, addedOn: "2026-09-26", name: "Toe Mobility", area: "", when: "End of day",
       img: "assets/hep-4-toe-mobility-animated.svg", alt: "Animated foot diagrams: toes spreading apart, and toes curling downward then straightening",
       steps: [
         "Sit with your foot resting on the opposite knee.",
@@ -47,7 +47,7 @@
         "Then gently bend the toes downward (flexion) and hold briefly."
       ],
       purpose: "Reduce tightness in the muscles on top of the foot and toes.", dose: "Time: 2 minutes" },
-    { id: "heelBall", n: 5, name: "Ball-Squeeze Heel Raise", area: "Foot / Calf", when: "Standing",
+    { id: "heelBall", n: 5, addedOn: "2026-10-09", name: "Ball-Squeeze Heel Raise", area: "Foot / Calf", when: "Standing",
       img: "assets/hep-5-heel-ball-raise-animated.svg", alt: "Animated standing heel raise with a small ball squeezed between the heels, looping up and down",
       steps: [
         "Stand with feet hip-width apart, holding onto a counter or chair for balance.",
@@ -56,7 +56,7 @@
         "Lower slowly back down. That's one rep."
       ],
       purpose: "Builds calf strength while reinforcing straight heel alignment, which takes strain off the plantar fascia.", dose: "Reps: 20 &middot; Sets: 3" },
-    { id: "lunge", n: 6, name: "Elevated Rear-Foot Lunge", area: "Hip / Leg", when: "Standing, back foot elevated",
+    { id: "lunge", n: 6, addedOn: "2026-10-21", name: "Elevated Rear-Foot Lunge", area: "Hip / Leg", when: "Standing, back foot elevated",
       img: "assets/hep-6-lunge-animated.svg", alt: "Animated standing lunge with the back foot resting on an elevated surface such as a couch, looping the crouch down and up on the front leg",
       steps: [
         "Stand a couple of feet in front of a couch or other sturdy elevated surface, facing away from it.",
@@ -65,7 +65,7 @@
         "Push back up through your front heel to standing. That's one rep."
       ],
       purpose: "Builds single-leg strength and control through the front hip and leg, supporting your return to volleyball and basketball.", dose: "Reps: 10 &middot; Sets: 2" },
-    { id: "wristExt", n: 7, name: "Wrist Extension Lift", area: "Forearm / Wrist", when: "Seated at a table",
+    { id: "wristExt", n: 7, addedOn: "2026-10-09", name: "Wrist Extension Lift", area: "Forearm / Wrist", when: "Seated at a table",
       img: "assets/hep-7-wrist-extension-animated.svg", alt: "Animated forearm flat on a table, looping the hand lifting up at the wrist while holding a weight",
       steps: [
         "Sit at a table. Rest your forearm flat on it, palm facing down, with your elbow and forearm staying still the whole time.",
@@ -74,7 +74,7 @@
         "Lower under control back to flat. That's one rep."
       ],
       purpose: "Strengthens the tendons on the back of the forearm feeding into the wrist.", dose: "Weight: 5 lb &middot; Reps: 10 &middot; Sets: 3" },
-    { id: "wristFlex", n: 8, name: "Thumb-Up Wrist Lift", area: "Forearm / Wrist", when: "Seated at a table",
+    { id: "wristFlex", n: 8, addedOn: "2026-10-09", name: "Thumb-Up Wrist Lift", area: "Forearm / Wrist", when: "Seated at a table",
       img: "assets/hep-8-thumb-up-wrist-lift-animated.svg", alt: "Animated forearm flat on a table with the hand upright, thumb pointing up like starting a thumb war, looping side to side",
       steps: [
         "Same setup, forearm flat on the table — this time make a fist with your thumb pointing straight up, like you're about to start a thumb war. Palm faces sideways, not up or down.",
@@ -83,7 +83,7 @@
         "That's one rep."
       ],
       purpose: "Strengthens the wrist in the thumb-up plane, which loads the pinky-side tendons more directly than a flat-palm curl.", dose: "Weight: 5 lb &middot; Reps: 10 &middot; Sets: 3" },
-    { id: "wristStretch", n: 9, name: "Wrist Flexor Stretch", area: "Forearm / Wrist", when: "Any time",
+    { id: "wristStretch", n: 9, addedOn: "2026-10-09", name: "Wrist Flexor Stretch", area: "Forearm / Wrist", when: "Any time",
       img: "assets/hep-9-wrist-stretch-animated.svg", alt: "Animated arm extended with the opposite hand gently pulling the fingers down and back in a slow hold-and-release loop",
       steps: [
         "Hold your right arm out in front of you, elbow straight, palm facing you, fingers pointing down.",
@@ -92,7 +92,7 @@
         "Hold 20–30 seconds, then release slowly."
       ],
       purpose: "Keeps the forearm tendons mobile between strengthening sets.", dose: "Hold: 20&ndash;30 sec &middot; Reps: 2&ndash;3" },
-    { id: "pronationBand", n: 10, name: "Resisted Forearm Pronation", area: "Forearm / Wrist", when: "Seated at a table",
+    { id: "pronationBand", n: 10, addedOn: "2026-11-09", name: "Resisted Forearm Pronation", area: "Forearm / Wrist", when: "Seated at a table",
       img: "assets/hep-10-band-pronation-animated.svg", alt: "Animated forearm flat on a table holding a resistance band, rotating the pinky side of the hand up and to the left against the band",
       steps: [
         "Sit at a table. Rest your forearm flat on it, holding one end of a resistance band in a neutral grip (thumb up), with the other end anchored or held taut to your left.",
@@ -101,7 +101,7 @@
       ],
       purpose: "Strengthens the forearm pronator muscles on the pinky side — a likely muscular (not tendon) source of the discomfort there. Mild discomfort is expected; stop if it sharpens.",
       dose: "Reps: 12 &middot; Sets: 2" },
-    { id: "nightBoot", n: 11, name: "Night Dorsiflexion Boot", area: "Right Foot", when: "Overnight",
+    { id: "nightBoot", n: 11, addedOn: "2026-10-09", name: "Night Dorsiflexion Boot", area: "Right Foot", when: "Overnight",
       img: "assets/hep-10-night-boot-animated.svg", alt: "Right foot held at a 90 degree angle in a night boot, with a soft ambient zzz pulse",
       steps: [
         "Before bed, put on the night boot on your right foot as shown by the clinic.",
@@ -113,6 +113,15 @@
 
   // Single source of truth for what counts toward a complete day: every HEP item.
   var REQUIRED_DAILY = HEP.map(function (x) { return x.id; });
+
+  // What actually counted as "complete" on a given day: only the exercises that
+  // existed yet. Without this, adding a new exercise today would retroactively
+  // mark every earlier day incomplete and wipe out an established streak, even
+  // though those days were fully done under the checklist as it stood then.
+  function requiredIdsFor(dateStr) {
+    return HEP.filter(function (x) { return !x.addedOn || x.addedOn <= dateStr; })
+              .map(function (x) { return x.id; });
+  }
 
   // ---------- offline cache (localStorage mirrors the last known shared record) ----------
   function loadCache() {
@@ -135,9 +144,10 @@
   function pad(n) { return n < 10 ? "0" + n : "" + n; }
   function fmtDate(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
   function addDays(str, n) { var d = new Date(str + "T00:00:00"); d.setDate(d.getDate() + n); return d; }
-  function isComplete(rec) {
+  function isComplete(rec, dateStr) {
     if (!rec) return false;
-    for (var i = 0; i < REQUIRED_DAILY.length; i++) { if (!rec[REQUIRED_DAILY[i]]) return false; }
+    var required = dateStr ? requiredIdsFor(dateStr) : REQUIRED_DAILY;
+    for (var i = 0; i < required.length; i++) { if (!rec[required[i]]) return false; }
     return true;
   }
   // Carries the pre-consolidation keys forward: Exercise 1 (calf) and
@@ -173,11 +183,11 @@
   // ---------- derived ----------
   function computeStreak() {
     var cursor = new Date(state.todayKey + "T00:00:00");
-    if (!isComplete(state.logs[state.todayKey])) cursor.setDate(cursor.getDate() - 1);
+    if (!isComplete(state.logs[state.todayKey], state.todayKey)) cursor.setDate(cursor.getDate() - 1);
     var streak = 0;
     while (true) {
       var ds = fmtDate(cursor);
-      if (isComplete(state.logs[ds])) { streak++; cursor.setDate(cursor.getDate() - 1); }
+      if (isComplete(state.logs[ds], ds)) { streak++; cursor.setDate(cursor.getDate() - 1); }
       else break;
     }
     return streak;
@@ -221,10 +231,10 @@
       var d = addDays(state.todayKey, -i);
       var ds = fmtDate(d);
       var rec = state.logs[ds];
-      var complete = isComplete(rec);
+      var complete = isComplete(rec, ds);
       var cls = "history-dot";
       if (complete) cls += " full";
-      else if (rec && REQUIRED_DAILY.some(function (id) { return rec[id]; })) cls += " half";
+      else if (rec && requiredIdsFor(ds).some(function (id) { return rec[id]; })) cls += " half";
       var isToday = ds === state.todayKey;
       if (isToday) cls += " today";
       var canTap = editable && !isToday;
@@ -450,7 +460,7 @@
   function setDayComplete(dateStr, complete) {
     commit(function () {
       var rec = Object.assign({}, state.logs[dateStr] || {});
-      REQUIRED_DAILY.forEach(function (id) { rec[id] = complete; });
+      requiredIdsFor(dateStr).forEach(function (id) { rec[id] = complete; });
       rec.date = dateStr;
       state.logs[dateStr] = rec;
     });
@@ -463,7 +473,7 @@
         var dot = e.target.closest(".history-dot[data-date]");
         if (!dot) return;
         var ds = dot.getAttribute("data-date");
-        setDayComplete(ds, !isComplete(state.logs[ds]));
+        setDayComplete(ds, !isComplete(state.logs[ds], ds));
       });
     }
     var hepList = document.querySelector(".hep-list");
