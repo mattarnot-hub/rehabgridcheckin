@@ -84,7 +84,7 @@
       ],
       purpose: "Builds tendon tolerance through a sustained hold plus a slow, loaded lowering phase.", dose: "Weight: 10 lb &middot; Reps: 2&ndash;3 &middot; ~8 sec per rep" },
     { id: "wristStretch", n: 9, addedOn: "2026-10-09", name: "Weighted Wrist Curl — Cup Grip", area: "Forearm / Wrist", when: "Seated at a table",
-      img: "assets/hep-9-cup-grip-curl-animated.svg", alt: "Animated forearm flat on a table, fist cupped around the bottom of a dumbbell held upright, lifting at the wrist, holding, then lowering slowly",
+      img: "assets/hep-9-cup-grip-curl-animated-v2.svg", alt: "Animated forearm flat on a table, wrist drooping slightly lower than the arm at rest, fist cupped around the bottom of a dumbbell held upright, lifting at the wrist, holding, then lowering slowly",
       steps: [
         "Sit at a table. Rest your forearm flat on it. Hold a 10 lb dumbbell by its bottom end, so your hand is shaped like you're holding a cup. Keep your forearm and elbow still.",
         "Lift the weight up, curling at the wrist.",
