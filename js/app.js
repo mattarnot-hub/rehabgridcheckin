@@ -69,29 +69,29 @@
       img: "assets/hep-7-wrist-extension-animated.svg", alt: "Animated forearm flat on a table, looping the hand lifting up at the wrist while holding a weight",
       steps: [
         "Sit at a table. Rest your forearm flat on it, palm facing down, with your elbow and forearm staying still the whole time.",
-        "Hold a 5 lb weight in your hand, which hangs just past the edge of the table.",
+        "Hold a 10 lb weight in your hand, which hangs just past the edge of the table.",
         "Slowly lift the back of your hand up toward the ceiling, using only your wrist.",
         "Lower under control back to flat. That's one rep."
       ],
-      purpose: "Strengthens the tendons on the back of the forearm feeding into the wrist.", dose: "Weight: 5 lb &middot; Reps: 10 &middot; Sets: 3" },
-    { id: "wristFlex", n: 8, addedOn: "2026-10-09", name: "Thumb-Up Wrist Lift", area: "Forearm / Wrist", when: "Seated at a table",
-      img: "assets/hep-8-thumb-up-wrist-lift-animated.svg", alt: "Animated forearm flat on a table with the hand upright, thumb pointing up like starting a thumb war, looping side to side",
+      purpose: "Strengthens the tendons on the back of the forearm feeding into the wrist.", dose: "Weight: 10 lb &middot; Reps: 10 &middot; Sets: 3" },
+    { id: "wristFlex", n: 8, addedOn: "2026-10-09", name: "Weighted Wrist Curl — Palm Up", area: "Forearm / Wrist", when: "Seated at a table",
+      img: "assets/hep-8-palm-up-curl-animated.svg", alt: "Animated forearm flat on a table, palm up, holding a dumbbell that lifts at the wrist, holds, then lowers slowly",
       steps: [
-        "Same setup, forearm flat on the table — this time make a fist with your thumb pointing straight up, like you're about to start a thumb war. Palm faces sideways, not up or down.",
-        "Hold the 5 lb weight in this grip. Keep your forearm and elbow still.",
-        "Keeping your palm vertical the whole time, lift your hand up, then lower it back down, moving only at the wrist.",
-        "That's one rep."
+        "Sit at a table. Rest your forearm flat on it, palm facing up, holding a 10 lb dumbbell. Keep your forearm and elbow still.",
+        "Curl your wrist up, lifting the weight toward you.",
+        "Hold at the top for 5 seconds.",
+        "Lower back down slowly, over about 3 seconds, to load the tendon on the way down. That's one rep — about 8 seconds total."
       ],
-      purpose: "Strengthens the wrist in the thumb-up plane, which loads the pinky-side tendons more directly than a flat-palm curl.", dose: "Weight: 5 lb &middot; Reps: 10 &middot; Sets: 3" },
-    { id: "wristStretch", n: 9, addedOn: "2026-10-09", name: "Wrist Flexor Stretch", area: "Forearm / Wrist", when: "Any time",
-      img: "assets/hep-9-wrist-stretch-animated.svg", alt: "Animated arm extended with the opposite hand gently pulling the fingers down and back in a slow hold-and-release loop",
+      purpose: "Builds tendon tolerance through a sustained hold plus a slow, loaded lowering phase.", dose: "Weight: 10 lb &middot; Reps: 2&ndash;3 &middot; ~8 sec per rep" },
+    { id: "wristStretch", n: 9, addedOn: "2026-10-09", name: "Weighted Wrist Curl — Cup Grip", area: "Forearm / Wrist", when: "Seated at a table",
+      img: "assets/hep-9-cup-grip-curl-animated.svg", alt: "Animated forearm flat on a table, fist cupped around the bottom of a dumbbell held upright, lifting at the wrist, holding, then lowering slowly",
       steps: [
-        "Hold your right arm out in front of you, elbow straight, palm facing you, fingers pointing down.",
-        "With your left hand, gently grasp your right fingers and pull them down and back toward you.",
-        "You should feel a gentle stretch along the top of your forearm, not sharp pain.",
-        "Hold 20–30 seconds, then release slowly."
+        "Sit at a table. Rest your forearm flat on it. Hold a 10 lb dumbbell by its bottom end, so your hand is shaped like you're holding a cup. Keep your forearm and elbow still.",
+        "Lift the weight up, curling at the wrist.",
+        "Hold at the top for 5 seconds.",
+        "Lower back down slowly, over about 3 seconds, to load the tendon on the way down. That's one rep — about 8 seconds total."
       ],
-      purpose: "Keeps the forearm tendons mobile between strengthening sets.", dose: "Hold: 20&ndash;30 sec &middot; Reps: 2&ndash;3" },
+      purpose: "Same hold-and-slow-lower loading as the palm-up curl, from a cup grip to vary the load through the wrist.", dose: "Weight: 10 lb &middot; Reps: 2&ndash;3 &middot; ~8 sec per rep" },
     { id: "pronationBand", n: 10, addedOn: "2026-11-09", name: "Resisted Forearm Pronation", area: "Forearm / Wrist", when: "Seated at a table",
       img: "assets/hep-10-band-pronation-animated.svg", alt: "Animated forearm flat on a table holding a resistance band, rotating the pinky side of the hand up and to the left against the band",
       steps: [
