@@ -24,5 +24,9 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+      # Give the artifact API a moment to index before deploy-pages looks it
+      # up - without this, deploy-pages can intermittently fail with "Found
+      # 0 artifact(s)" right after a fast upload.
+      - run: sleep 15
       - id: deployment
         uses: actions/deploy-pages@v4
