@@ -2,10 +2,10 @@
   <style>
     /* Real tempo, not a quick demo loop: lift, hold 5 sec, lower slowly - 8 sec per rep. */
     @keyframes curlHoldLower {
-      0%       { transform: rotate(0deg); }
+      0%       { transform: rotate(16deg); }
       14%      { transform: rotate(-34deg); }
       74%      { transform: rotate(-34deg); }
-      100%     { transform: rotate(0deg); }
+      100%     { transform: rotate(16deg); }
     }
     .hand-wrap { transform-origin: 225px 163px; animation: curlHoldLower 8s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) {

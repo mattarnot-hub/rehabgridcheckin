@@ -75,7 +75,7 @@
       ],
       purpose: "Strengthens the tendons on the back of the forearm feeding into the wrist.", dose: "Weight: 10 lb &middot; Reps: 10 &middot; Sets: 3" },
     { id: "wristFlex", n: 8, addedOn: "2026-10-09", name: "Weighted Wrist Curl — Palm Up", area: "Forearm / Wrist", when: "Seated at a table",
-      img: "assets/hep-8-palm-up-curl-animated.svg", alt: "Animated forearm flat on a table, palm up, holding a dumbbell that lifts at the wrist, holds, then lowers slowly",
+      img: "assets/hep-8-palm-up-curl-animated-v2.svg", alt: "Animated forearm flat on a table, wrist resting flat or slightly lower than the arm, palm up, holding a dumbbell that lifts at the wrist, holds, then lowers slowly",
       steps: [
         "Sit at a table. Rest your forearm flat on it, palm facing up, holding a 10 lb dumbbell. Keep your forearm and elbow still.",
         "Curl your wrist up, lifting the weight toward you.",
