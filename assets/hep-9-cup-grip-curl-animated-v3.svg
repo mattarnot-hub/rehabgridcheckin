@@ -1,10 +1,10 @@
 <svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
   <style>
     @keyframes curlHoldLower {
-      0%       { transform: rotate(22deg); }
+      0%       { transform: rotate(42deg); }
       14%      { transform: rotate(-10deg); }
       74%      { transform: rotate(-10deg); }
-      100%     { transform: rotate(22deg); }
+      100%     { transform: rotate(42deg); }
     }
     .hand-wrap { transform-origin: 225px 163px; animation: curlHoldLower 8s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) {
